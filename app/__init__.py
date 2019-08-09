@@ -2,6 +2,8 @@
 import os
 import time
 from flask import Flask, Request, request, send_from_directory, make_response, url_for, redirect, flash, jsonify, render_template, current_app
+
+from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
@@ -30,6 +32,7 @@ class ProxiedRequest(Request):
 
 
 app = Flask(__name__)  # pylint: disable=C
+CORS(app)
 limiter = Limiter(app, key_func=get_remote_address)
 app.request_class = ProxiedRequest
 app.config.from_object(AppConfig)
