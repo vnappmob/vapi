@@ -6,13 +6,12 @@ from app.errors import error_response
 bp = Blueprint('api_province', __name__)  # pylint: disable=C
 
 
-@bp.route('/api/province', methods=['GET'])
+@bp.route('/api/province/', methods=['GET'])
 def api_province_get():
     """
     Retrieve a list of province
     ```
     [GET] /api/province
-        -H 'Authorization: Bearer {}'
     ```
     """
     db_connect = VDBConnect()
@@ -29,13 +28,14 @@ def api_province_get():
     return error_response(404, str(db_connect.error))
 
 
-@bp.route('/api/province/<string:province_id>/district', methods=['GET'])
+@bp.route('/api/province/<string:province_id>/', methods=['GET'])
+@bp.route('/api/province/<string:province_id>/district/', methods=['GET'])
 def api_district_get(province_id):
     """
     Retrieve a list of district in province_id
     ```
+    [GET] /api/province/{province_id}/
     [GET] /api/province/{province_id}/district
-        -H 'Authorization: Bearer {}'
     ```
     """
     db_connect = VDBConnect()
@@ -54,13 +54,16 @@ def api_district_get(province_id):
     return error_response(404, str(db_connect.error))
 
 
-@bp.route('/api/province/<string:province_id>/district/<string:district_id>/ward', methods=['GET'])
+@bp.route('/api/province/<string:province_id>/<string:district_id>/', methods=['GET'])
+@bp.route('/api/province/<string:province_id>/district/<string:district_id>/', methods=['GET'])
+@bp.route('/api/province/<string:province_id>/district/<string:district_id>/ward/', methods=['GET'])
 def api_ward_get(province_id, district_id):
     """
     Retrieve a list of ward in district_id
     ```
+    [GET] /api/province/{province_id}/{district_id}/
+    [GET] /api/province/{province_id}/district/{district_id}/
     [GET] /api/province/{province_id}/district/{district_id}/ward
-        -H 'Authorization: Bearer {}'
     ```
     """
     db_connect = VDBConnect()
