@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block customhead %}
+{% if env == 'production' %}
+{% endif %}
+{% endblock %}
+{% block content %}
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-8 mb-3">
+      <div class="card border rounded shadow-sm">
+        <div class="card-body">
+          <h1 class="card-title mb2">{{ title }}</h1>
+          <div class="card-text">
+            {{ description }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+
+    </div>
+
+  </div>
+</main>
+{% endblock %}

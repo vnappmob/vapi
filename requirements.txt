@@ -1,0 +1,14 @@
+pytest
+pytest-cov
+python-dotenv
+gunicorn
+mysqlclient==1.3.12
+Flask==1.0.2
+Flask-Cors==3.0.3
+flask_limiter
+Jinja2
+Unidecode==0.04.1
+python-dateutil
+Babel
+google-api-python-client
+oauth2client
