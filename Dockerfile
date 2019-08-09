@@ -4,4 +4,4 @@ RUN apt-get install -y default-libmysqlclient-dev
 WORKDIR /vapi
 COPY . /vapi
 RUN pip install -r requirements.txt
-CMD exec gunicorn -b :5102 --access-logfile - --error-logfile - app:app
+CMD exec gunicorn -b :5103 --access-logfile - --error-logfile - app:app
