@@ -17,7 +17,7 @@ def api_province_get():
     db_connect = VDBConnect()
     if db_connect.connected:
         try:
-            statements = ("SELECT * FROM vnappmob_list_province;")
+            statements = ("SELECT * FROM vnappmob_list_province ORDER BY province_name;")
             try:
                 results = db_connect.readall(statements)
                 return make_response((jsonify({'results': results})), 200)
@@ -42,7 +42,7 @@ def api_district_get(province_id):
     if db_connect.connected:
         try:
             statements = (
-                "SELECT * FROM vnappmob_list_district WHERE province_id = '" + province_id + "';")
+                "SELECT * FROM vnappmob_list_district WHERE province_id = '" + province_id + "' ORDER BY district_name;")
             print(statements)
             try:
                 results = db_connect.readall(statements)
@@ -70,7 +70,7 @@ def api_ward_get(province_id, district_id):
     if db_connect.connected:
         try:
             statements = (
-                "SELECT * FROM vnappmob_list_ward WHERE district_id = '" + district_id + "';")
+                "SELECT * FROM vnappmob_list_ward WHERE district_id = '" + district_id + "' ORDER BY ward_name;")
             print(statements)
             try:
                 results = db_connect.readall(statements)
