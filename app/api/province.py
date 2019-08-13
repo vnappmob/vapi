@@ -17,7 +17,9 @@ def api_province_get():
     db_connect = VDBConnect()
     if db_connect.connected:
         try:
-            statements = ("SELECT * FROM vnappmob_list_province ORDER BY province_name COLLATE utf8_vietnamese_ci;")
+            statements = ("SELECT * FROM vnappmob_list_province "
+                          "ORDER BY province_name "
+                          "COLLATE utf8_vietnamese_ci;")
             try:
                 results = db_connect.readall(statements)
                 return make_response((jsonify({'results': results})), 200)
@@ -42,7 +44,9 @@ def api_district_get(province_id):
     if db_connect.connected:
         try:
             statements = (
-                "SELECT * FROM vnappmob_list_district WHERE province_id = '" + province_id + "' ORDER BY district_name COLLATE utf8_vietnamese_ci;")
+                "SELECT * FROM vnappmob_list_district WHERE province_id = '" +
+                province_id +
+                "' ORDER BY district_name COLLATE utf8_vietnamese_ci;")
             print(statements)
             try:
                 results = db_connect.readall(statements)
@@ -54,9 +58,15 @@ def api_district_get(province_id):
     return error_response(404, str(db_connect.error))
 
 
-@bp.route('/api/province/<string:province_id>/<string:district_id>/', methods=['GET'])
-@bp.route('/api/province/<string:province_id>/district/<string:district_id>/', methods=['GET'])
-@bp.route('/api/province/<string:province_id>/district/<string:district_id>/ward/', methods=['GET'])
+@bp.route(
+    '/api/province/<string:province_id>/<string:district_id>/',
+    methods=['GET'])
+@bp.route(
+    '/api/province/<string:province_id>/district/<string:district_id>/',
+    methods=['GET'])
+@bp.route(
+    '/api/province/<string:province_id>/district/<string:district_id>/ward/',
+    methods=['GET'])
 def api_ward_get(province_id, district_id):
     """
     Retrieve a list of ward in district_id
@@ -70,7 +80,9 @@ def api_ward_get(province_id, district_id):
     if db_connect.connected:
         try:
             statements = (
-                "SELECT * FROM vnappmob_list_ward WHERE district_id = '" + district_id + "' ORDER BY ward_name COLLATE utf8_vietnamese_ci;")
+                "SELECT * FROM vnappmob_list_ward WHERE district_id = '" +
+                district_id +
+                "' ORDER BY ward_name COLLATE utf8_vietnamese_ci;")
             print(statements)
             try:
                 results = db_connect.readall(statements)

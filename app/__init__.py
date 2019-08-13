@@ -10,6 +10,7 @@ from flask_limiter.util import get_remote_address
 from app.db.db_connect import VDBConnect, MySQLdb
 from app.errors import error_response
 from app.api.province import bp as api_province_bp
+from app.api.gold import bp as api_gold_bp
 
 FLASK_ENV = os.environ.get("FLASK_ENV", default='production')
 if FLASK_ENV == 'development':
@@ -38,6 +39,7 @@ app.request_class = ProxiedRequest
 app.config.from_object(AppConfig)
 
 app.register_blueprint(api_province_bp)
+app.register_blueprint(api_gold_bp)
 
 CURRENT_YEAR = time.strftime("%Y")
 BASE_TITLE = ('vAPI - Open API for Vietnamese projects')
