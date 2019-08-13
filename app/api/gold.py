@@ -33,20 +33,50 @@ def api_vbiz_post():
             slash_settings = db_connect.get_slash_setting()
             if slash_settings['api'] == request_api:
                 json_data = request.get_json()
-                vals = []
-                statements = (
-                    "INSERT INTO vnappmob_gold_sjc "
-                    "(id, buy_1l, sell_1l, buy_1c, "
-                    "sell_1c, buy_nhan1c, sell_nhan1c, buy_trangsuc49, "
-                    "sell_trangsuc49) "
-                    "VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s);")
-                vals.extend((json_data['buy_1l'], json_data['sell_1l'],
-                             json_data['buy_1c'], json_data['sell_1c'],
-                             json_data['buy_nhan1c'], json_data['sell_nhan1c'],
-                             json_data['buy_trangsuc49'],
-                             json_data['sell_trangsuc49']))
-                db_connect.writecommit(statements, tuple(vals))
-                return make_response((jsonify({'results': 201})), 201)
+
+                last_row = db_connect.readone(
+                    "SELECT * FROM vnappmob_gold_sjc "
+                    "ORDER BY id DESC LIMIT 1;")
+                print(last_row)
+                print(json_data)
+                # if (last_row['buy_1l'] != json_data['buy_1l']
+                #         and last_row['sell_1l'] != json_data['sell_1l']
+                #         and last_row['buy_1c'] != json_data['buy_1c']
+                #         and last_row['sell_1c'] != json_data['sell_1c']
+                #         and last_row['buy_nhan1c'] != json_data['buy_nhan1c']
+                #         and last_row['sell_nhan1c'] != json_data['sell_nhan1c']
+                #         and last_row['buy_trangsuc49'] !=
+                #         json_data['buy_trangsuc49']
+                #         and last_row['sell_trangsuc49'] !=
+                #         json_data['sell_trangsuc49']):
+                if any([
+                        last_row['buy_1l'] != json_data['buy_1l'],
+                        last_row['sell_1l'] != json_data['sell_1l'],
+                        last_row['buy_1c'] != json_data['buy_1c'],
+                        last_row['sell_1c'] != json_data['sell_1c'],
+                        last_row['buy_nhan1c'] != json_data['buy_nhan1c'],
+                        last_row['sell_nhan1c'] != json_data['sell_nhan1c'],
+                        last_row['buy_trangsuc49'] !=
+                        json_data['buy_trangsuc49'],
+                        last_row['sell_trangsuc49'] !=
+                        json_data['sell_trangsuc49']
+                ]):
+                    vals = []
+                    statements = (
+                        "INSERT INTO vnappmob_gold_sjc "
+                        "(id, buy_1l, sell_1l, buy_1c, "
+                        "sell_1c, buy_nhan1c, sell_nhan1c, buy_trangsuc49, "
+                        "sell_trangsuc49) "
+                        "VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s);")
+                    vals.extend(
+                        (json_data['buy_1l'], json_data['sell_1l'],
+                         json_data['buy_1c'], json_data['sell_1c'],
+                         json_data['buy_nhan1c'], json_data['sell_nhan1c'],
+                         json_data['buy_trangsuc49'],
+                         json_data['sell_trangsuc49']))
+                    db_connect.writecommit(statements, tuple(vals))
+                    return make_response((jsonify({'results': 201})), 201)
+                return make_response((jsonify({'results': 200})), 200)
             return error_response(403, 'API <---> Data')
         except MySQLdb.Error as err:  # pylint: disable=E
             return error_response(400, str(err))
