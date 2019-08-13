@@ -37,29 +37,23 @@ def api_vbiz_post():
                 last_row = db_connect.readone(
                     "SELECT * FROM vnappmob_gold_sjc "
                     "ORDER BY id DESC LIMIT 1;")
-                print(float(last_row['buy_1l']))
-                print(float(json_data['buy_1l']))
-                # if (last_row['buy_1l'] != json_data['buy_1l']
-                #         and last_row['sell_1l'] != json_data['sell_1l']
-                #         and last_row['buy_1c'] != json_data['buy_1c']
-                #         and last_row['sell_1c'] != json_data['sell_1c']
-                #         and last_row['buy_nhan1c'] != json_data['buy_nhan1c']
-                #         and last_row['sell_nhan1c'] != json_data['sell_nhan1c']
-                #         and last_row['buy_trangsuc49'] !=
-                #         json_data['buy_trangsuc49']
-                #         and last_row['sell_trangsuc49'] !=
-                #         json_data['sell_trangsuc49']):
-                if any([
-                        float(last_row['buy_1l']) != float(json_data['buy_1l']),
-                        float(last_row['sell_1l']) != float(json_data['sell_1l']),
-                        float(last_row['buy_1c']) != float(json_data['buy_1c']),
-                        float(last_row['sell_1c']) != float(json_data['sell_1c']),
-                        float(last_row['buy_nhan1c']) != float(json_data['buy_nhan1c']),
-                        float(last_row['sell_nhan1c']) != float(json_data['sell_nhan1c']),
-                        float(last_row['buy_trangsuc49']) !=
-                        float(json_data['buy_trangsuc49']),
-                        float(last_row['sell_trangsuc49']) !=
-                        float(json_data['sell_trangsuc49'])
+                if last_row['id'] is None or any([
+                        float(last_row['buy_1l']) != float(
+                            json_data['buy_1l']),
+                        float(last_row['sell_1l']) != float(
+                            json_data['sell_1l']),
+                        float(last_row['buy_1c']) != float(
+                            json_data['buy_1c']),
+                        float(last_row['sell_1c']) != float(
+                            json_data['sell_1c']),
+                        float(last_row['buy_nhan1c']) != float(
+                            json_data['buy_nhan1c']),
+                        float(last_row['sell_nhan1c']) != float(
+                            json_data['sell_nhan1c']),
+                        float(last_row['buy_trangsuc49']) != float(
+                            json_data['buy_trangsuc49']),
+                        float(last_row['sell_trangsuc49']) != float(
+                            json_data['sell_trangsuc49'])
                 ]):
                     vals = []
                     statements = (
