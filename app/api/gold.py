@@ -6,6 +6,45 @@ from app.errors import error_response
 bp = Blueprint('api_gold', __name__)  # pylint: disable=C
 
 
+@bp.route('/api/gold/sjc', methods=['GET'])
+def api_province_get():
+    """
+    ```
+    [GET] /api/gold/sjc?api_key={api_key}&date_from={date_from}&date_to={date_to}
+    ```
+    """
+    db_connect = VDBConnect()
+    if db_connect.connected:
+        try:
+            request_api = request.args.get('api_key', default='', type=str)
+            date_from = request.args.get('date_from', default=0, type=int)
+            date_to = request.args.get('date_to', default=0, type=int)
+
+            slash_settings = db_connect.get_slash_setting()
+            if slash_settings['api'] == request_api:
+                # SELECT * FROM `vnappmob_gold_sjc`
+                # JOIN (
+                #       SELECT MAX(t.datetime) AS datetime
+                #       FROM vnappmob_gold_sjc AS t
+                #       GROUP BY YEAR(t.datetime), MONTH(t.datetime), DATE(t.datetime)
+                # ) AS x USING (datetime)
+                statements = (
+                    "SELECT UNIX_TIMESTAMP(t1.datetime) as datetime, "
+                    "t1.buy_1l, t1.sell_1l, t1.buy_1c, t1.sell_1c, "
+                    "t1.buy_nhan1c, t1.sell_nhan1c, t1.buy_trangsuc49, t1.sell_trangsuc49 "
+                    "FROM vnappmob_gold_sjc t1 "
+                    "ORDER BY id DESC LIMIT 1;")
+                try:
+                    results = db_connect.readall(statements)
+                    return make_response((jsonify({'results': results})), 200)
+                except MySQLdb.Error as err:  # pylint: disable=E
+                    return error_response(400, str(err))
+            return error_response(403, 'Invalid api_key')
+        finally:
+            db_connect.close()
+    return error_response(404, str(db_connect.error))
+
+
 @bp.route('/api/gold/sjc', methods=['POST'])
 def api_vbiz_post():
     """
@@ -37,7 +76,7 @@ def api_vbiz_post():
                 last_row = db_connect.readone(
                     "SELECT * FROM vnappmob_gold_sjc "
                     "ORDER BY id DESC LIMIT 1;")
-                if last_row['id'] is None or any([
+                if any([
                         float(last_row['buy_1l']) != float(
                             json_data['buy_1l']),
                         float(last_row['sell_1l']) != float(
@@ -71,7 +110,7 @@ def api_vbiz_post():
                     db_connect.writecommit(statements, tuple(vals))
                     return make_response((jsonify({'results': 201})), 201)
                 return make_response((jsonify({'results': 200})), 200)
-            return error_response(403, 'API <---> Data')
+            return error_response(403, 'Invalid api_key')
         except MySQLdb.Error as err:  # pylint: disable=E
             return error_response(400, str(err))
         finally:

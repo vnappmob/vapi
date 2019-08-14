@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 10.130.38.49
--- Generation Time: Aug 09, 2019 at 06:30 PM
+-- Generation Time: Aug 14, 2019 at 12:01 PM
 -- Server version: 5.6.26-log
 -- PHP Version: 5.5.9-1ubuntu4.21
 
@@ -21,6 +21,54 @@ SET time_zone = "+00:00";
 --
 -- Database: `vapi_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vnappmob_gold_doji`
+--
+
+CREATE TABLE `vnappmob_gold_doji` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `buy_hcm` decimal(15,2) NOT NULL,
+  `sell_hcm` decimal(15,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vnappmob_gold_sjc`
+--
+
+CREATE TABLE `vnappmob_gold_sjc` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `buy_1l` decimal(15,2) NOT NULL,
+  `sell_1l` decimal(15,2) NOT NULL,
+  `buy_1c` decimal(15,2) NOT NULL,
+  `sell_1c` decimal(15,2) NOT NULL,
+  `buy_nhan1c` decimal(15,2) NOT NULL,
+  `sell_nhan1c` decimal(15,2) NOT NULL,
+  `buy_trangsuc49` decimal(15,2) NOT NULL,
+  `sell_trangsuc49` decimal(15,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Dumping data for table `vnappmob_gold_sjc`
+--
+
+INSERT INTO `vnappmob_gold_sjc` (`id`, `datetime`, `buy_1l`, `sell_1l`, `buy_1c`, `sell_1c`, `buy_nhan1c`, `sell_nhan1c`, `buy_trangsuc49`, `sell_trangsuc49`) VALUES
+(1, '2019-08-13 11:36:57', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(2, '2019-08-13 11:37:02', 41850000.00, 42200000.00, 41850000.00, 42230000.00, 41750000.00, 42300000.00, 41400000.00, 42200000.00),
+(3, '2019-08-14 01:22:06', 41850000.00, 42200000.00, 41850000.00, 42230000.00, 41700000.00, 42250000.00, 41400000.00, 42200000.00),
+(4, '2019-08-14 01:27:06', 41300000.00, 41700000.00, 41300000.00, 41730000.00, 41200000.00, 41750000.00, 40900000.00, 41700000.00),
+(5, '2019-08-14 01:29:06', 41250000.00, 41650000.00, 41250000.00, 41680000.00, 41150000.00, 41700000.00, 40850000.00, 41650000.00),
+(6, '2019-08-14 01:32:11', 41250000.00, 41650000.00, 41250000.00, 41680000.00, 41200000.00, 41750000.00, 40850000.00, 41650000.00),
+(7, '2019-08-14 01:43:07', 41200000.00, 41600000.00, 41200000.00, 41630000.00, 41150000.00, 41700000.00, 40800000.00, 41600000.00),
+(8, '2019-08-14 02:13:06', 41200000.00, 41600000.00, 41200000.00, 41630000.00, 41200000.00, 41750000.00, 40800000.00, 41600000.00),
+(9, '2019-08-14 02:22:06', 41250000.00, 41650000.00, 41250000.00, 41680000.00, 41250000.00, 41800000.00, 40850000.00, 41650000.00),
+(10, '2019-08-14 04:23:07', 41200000.00, 41600000.00, 41200000.00, 41630000.00, 41200000.00, 41750000.00, 40800000.00, 41600000.00);
 
 -- --------------------------------------------------------
 
@@ -12024,9 +12072,43 @@ INSERT INTO `vnappmob_list_ward` (`ward_id`, `ward_name`, `ward_type`, `district
 ('32245', 'Xã Tân Ân', 'Xã', '973'),
 ('32248', 'Xã Đất Mũi', 'Xã', '973');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vnappmob_slash_setting`
+--
+
+CREATE TABLE `vnappmob_slash_setting` (
+  `setting_id` tinyint(3) UNSIGNED NOT NULL,
+  `setting_key` varchar(64) COLLATE utf8mb4_bin NOT NULL,
+  `setting_value` varchar(512) COLLATE utf8mb4_bin NOT NULL,
+  `setting_never_gone` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Dumping data for table `vnappmob_slash_setting`
+--
+
+INSERT INTO `vnappmob_slash_setting` (`setting_id`, `setting_key`, `setting_value`, `setting_never_gone`) VALUES
+(1, 'api', 'FDp7WY0QyqmjM15UST09pKwJu1biM6Nf', 0);
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `vnappmob_gold_doji`
+--
+ALTER TABLE `vnappmob_gold_doji`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `doji_index` (`datetime`);
+
+--
+-- Indexes for table `vnappmob_gold_sjc`
+--
+ALTER TABLE `vnappmob_gold_sjc`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sjc_index` (`datetime`) USING BTREE;
 
 --
 -- Indexes for table `vnappmob_list_district`
@@ -12045,6 +12127,34 @@ ALTER TABLE `vnappmob_list_province`
 --
 ALTER TABLE `vnappmob_list_ward`
   ADD PRIMARY KEY (`ward_id`);
+
+--
+-- Indexes for table `vnappmob_slash_setting`
+--
+ALTER TABLE `vnappmob_slash_setting`
+  ADD PRIMARY KEY (`setting_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `vnappmob_gold_doji`
+--
+ALTER TABLE `vnappmob_gold_doji`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `vnappmob_gold_sjc`
+--
+ALTER TABLE `vnappmob_gold_sjc`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `vnappmob_slash_setting`
+--
+ALTER TABLE `vnappmob_slash_setting`
+  MODIFY `setting_id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
