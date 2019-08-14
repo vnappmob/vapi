@@ -1,7 +1,7 @@
 """app/__init__.py"""
 import os
 import time
-from flask import Flask, Request, request, send_from_directory, make_response, url_for, redirect, flash, jsonify, render_template, current_app
+from flask import Flask, Request, request
 
 from flask_cors import CORS
 from flask_limiter import Limiter
@@ -43,8 +43,7 @@ app.register_blueprint(api_gold_bp)
 
 CURRENT_YEAR = time.strftime("%Y")
 BASE_TITLE = ('vAPI - Open API for Vietnamese projects')
-BASE_DESCRIPTION = (
-    'Open API for Vietnamese projects')
+BASE_DESCRIPTION = ('Open API for Vietnamese projects')
 BASE_PHOTO = ('https://vnappmob.sgp1.cdn.digitaloceanspaces.com'
               '/vnappmob/assets/img/vapi_photo.png')
 

@@ -10,5 +10,4 @@ Jinja2
 Unidecode==0.04.1
 python-dateutil
 Babel
-google-api-python-client
-oauth2client
+simplejson
