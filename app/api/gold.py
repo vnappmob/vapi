@@ -1,4 +1,5 @@
 """app/api/gold.py"""
+import requests
 from flask import Blueprint, request, make_response, jsonify, current_app  # pylint: disable=W
 from app.db.db_connect import VDBConnect, MySQLdb
 from app.errors import error_response
@@ -108,6 +109,29 @@ def api_vbiz_post():
                          json_data['buy_trangsuc49'],
                          json_data['sell_trangsuc49']))
                     db_connect.writecommit(statements, tuple(vals))
+
+                    headers = {
+                        'Authorization':
+                        'key=' + current_app.config['VPRICE_FCM_KEY'],
+                        'Content-Type':
+                        'application/json'
+                    }
+
+                    data = (
+                        '{"notification": {"title": "vPrice - Biến động giá SJC"'
+                        ',"body": "1L: Mua ' + json_data['buy_1l'] + ' - Bán '
+                        + json_data['sell_1l'] +
+                        ' ","sound": "default"},"priority": "high",'
+                        '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
+                        '"id": "1","status": "done"},'
+                        '"to": "/topics/sjcgold"}')
+
+                    response = requests.post(
+                        'https://fcm.googleapis.com/fcm/send',
+                        headers=headers,
+                        data=data)
+                    print(response)
+
                     return make_response((jsonify({'results': 201})), 201)
                 return make_response((jsonify({'results': 200})), 200)
             return error_response(403, 'Invalid api_key')

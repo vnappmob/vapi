@@ -9,6 +9,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 class Config(object):
     """BaseConfig"""
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'vapi'
+    VPRICE_FCM_KEY = os.environ.get('VPRICE_FCM_KEY') or 'vapi'
 
 
 class DevelopmentConfig(Config):
