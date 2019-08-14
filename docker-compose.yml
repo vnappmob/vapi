@@ -17,6 +17,7 @@ services:
       DB_USER: $DB_USER
       DB_PASSWORD: $DB_PASSWORD
       SECRET_KEY: $SECRET_KEY
+      VPRICE_FCM_KEY: $VPRICE_FCM_KEY
       VIRTUAL_HOST: vapi.vnappmob.com
       VIRTUAL_PORT: 5103
       LETSENCRYPT_HOST: vapi.vnappmob.com

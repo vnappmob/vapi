@@ -33,4 +33,4 @@ deploy to production:
     - ssh-keyscan -H $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
   script:
     - rsync -r ./docker-compose.yml root@$DEPLOY_SERVER_IP:~/vapi/
-    - ssh root@$DEPLOY_SERVER_IP "docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY; cd vapi; docker pull $CI_REGISTRY/vnappmob/vapi:latest; docker-compose stop; SECRET_KEY=$DEPLOY_SECRET_KEY DB_HOST=$DB_HOST DB_USER=$DB_USER DB_PASSWORD=$DB_PASSWORD docker-compose up -d"
+    - ssh root@$DEPLOY_SERVER_IP "docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY; cd vapi; docker pull $CI_REGISTRY/vnappmob/vapi:latest; docker-compose stop; SECRET_KEY=$DEPLOY_SECRET_KEY VPRICE_FCM_KEY=$VPRICE_FCM_KEY DB_HOST=$DB_HOST DB_USER=$DB_USER DB_PASSWORD=$DB_PASSWORD docker-compose up -d"
