@@ -129,7 +129,7 @@ def api_vbiz_post():
                     response = requests.post(
                         'https://fcm.googleapis.com/fcm/send',
                         headers=headers,
-                        data=data)
+                        data=data.encode('utf-8'))
                     print(response)
 
                     return make_response((jsonify({'results': 201})), 201)
