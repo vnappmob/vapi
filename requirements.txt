@@ -11,3 +11,4 @@ Unidecode==0.04.1
 python-dateutil
 Babel
 simplejson
+requests
