@@ -119,8 +119,8 @@ def api_vbiz_post():
 
                     data = (
                         '{"notification": {"title": "vPrice - Biến động giá SJC"'
-                        ',"body": "1L: Mua ' + json_data['buy_1l'] + ' - Bán '
-                        + json_data['sell_1l'] +
+                        ',"body": "1L: Mua ' + '{:,d}'.format(json_data['buy_1l']) + ' - Bán '
+                        + '{:,d}'.format(json_data['sell_1l']) +
                         ' ","sound": "default"},"priority": "high",'
                         '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
                         '"id": "1","status": "done"},'
