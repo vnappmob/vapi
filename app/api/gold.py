@@ -122,6 +122,12 @@ def api_gold_sjc_post():
                         ',"body": "1L: Mua ' + '{:,d}'.format(
                             int(json_data['buy_1l'])) + ' - Bán ' +
                         '{:,d}'.format(int(json_data['sell_1l'])) +
+                        '\n1c: Mua ' + '{:,d}'.format(
+                            int(json_data['buy_1c'])) + ' - Bán ' +
+                        '{:,d}'.format(int(json_data['sell_1c'])) +
+                        '\nTrang sức: Mua ' + '{:,d}'.format(
+                            int(json_data['buy_trangsuc49'])) + ' - Bán ' +
+                        '{:,d}'.format(int(json_data['sell_trangsuc49'])) +
                         ' ","sound": "default"},"priority": "high",'
                         '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
                         '"id": "1","status": "done"},'
