@@ -131,7 +131,7 @@ def api_gold_sjc_post():
                         'https://fcm.googleapis.com/fcm/send',
                         headers=headers,
                         data=data.encode('utf-8'))
-                    print(response)
+                    print(response.status_code, response.text)
 
                     return make_response((jsonify({'results': 201})), 201)
                 return make_response((jsonify({'results': 200})), 200)
@@ -242,7 +242,7 @@ def api_gold_doji_post():
                         'https://fcm.googleapis.com/fcm/send',
                         headers=headers,
                         data=data.encode('utf-8'))
-                    print(response)
+                    print(response.status_code, response.text)
 
                     return make_response((jsonify({'results': 201})), 201)
                 return make_response((jsonify({'results': 200})), 200)
