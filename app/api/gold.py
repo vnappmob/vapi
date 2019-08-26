@@ -130,7 +130,7 @@ def api_gold_sjc_post():
                         '{:,d}'.format(int(json_data['sell_trangsuc49'])) +
                         ' ","sound": "default"},"priority": "high",'
                         '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                        '"id": "1","status": "done"},'
+                        '"id": "/topics/sjcgold","status": "done"},'
                         '"to": "/topics/sjcgold"}')
 
                     response = requests.post(
@@ -241,7 +241,7 @@ def api_gold_doji_post():
                         '{:,d}'.format(int(json_data['sell_hn'])) +
                         ' ","sound": "default"},"priority": "high",'
                         '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                        '"id": "1","status": "done"},'
+                        '"id": "/topics/dojigold","status": "done"},'
                         '"to": "/topics/dojigold"}')
 
                     response = requests.post(
