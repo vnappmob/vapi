@@ -18,7 +18,7 @@ sys.setrecursionlimit(1500)
 # -- Project information -----------------------------------------------------
 
 project = 'vAPI'
-copyright = '2019, VNAppMob'
+copyright = '2013-2019, VNAppMob'
 author = 'VNAppMob'
 
 # The full version, including alpha/beta/rc tags
@@ -32,7 +32,7 @@ master_doc = 'index'
 extensions = [
     'sphinx.ext.autodoc', 'recommonmark', 'sphinx.ext.napoleon',
     'sphinx.ext.todo', 'sphinxcontrib.autohttp.flask',
-    'sphinxcontrib.autohttp.flaskqref'
+    'sphinxcontrib.autohttp.flaskqref', 'sphinx_rtd_theme'
 ]
 source_suffix = {
     '.rst': 'restructuredtext',
@@ -51,7 +51,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
