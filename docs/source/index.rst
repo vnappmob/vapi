@@ -13,6 +13,7 @@ Welcome to vAPI's documentation!
    author.md
    province
    gold
+   exchange_rate
 
 
 Indices and tables

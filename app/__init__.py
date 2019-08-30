@@ -11,6 +11,7 @@ from app.db.db_connect import VDBConnect, MySQLdb
 from app.errors import error_response
 from app.api.province import bp as api_province_bp
 from app.api.gold import bp as api_gold_bp
+from app.api.exchange_rate import bp as api_exchange_rate_bp
 
 FLASK_ENV = os.environ.get("FLASK_ENV", default='production')
 if FLASK_ENV == 'development':
@@ -40,6 +41,7 @@ app.config.from_object(AppConfig)
 
 app.register_blueprint(api_province_bp)
 app.register_blueprint(api_gold_bp)
+app.register_blueprint(api_exchange_rate_bp)
 
 CURRENT_YEAR = time.strftime("%Y")
 BASE_TITLE = ('vAPI - Open API for Vietnamese projects')
