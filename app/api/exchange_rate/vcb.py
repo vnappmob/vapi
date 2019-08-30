@@ -49,8 +49,8 @@ def api_exchange_rate_vcb_get():
             if slash_settings['api'] == request_api:
                 statements = (
                     'SELECT t1.currency, t1.buy_cash, t1.buy_transfer, t1.sell '
-                    'FROM vnappmob_exchange_rate_vcb  t1'
-                    'GROUP BY currency'
+                    'FROM vnappmob_exchange_rate_vcb  t1 '
+                    'GROUP BY currency '
                     'ORDER by t1.currency, t1.datetime')
                 try:
                     results = db_connect.readall(statements)
