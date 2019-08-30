@@ -114,7 +114,7 @@ def api_exchange_rate_sbv_post():
                 post_datas = json_data['post_datas']
                 changed_list = []
                 for post_data in post_datas:
-                    currency = post_data['code']
+                    currency = post_data['currency']
                     buy = post_data['buy']
                     sell = post_data['sell']
                     latest_data = latest_datas_dict[currency]

@@ -125,7 +125,7 @@ def api_exchange_rate_vcb_post():
                 post_datas = json_data['post_datas']
                 changed_list = []
                 for post_data in post_datas:
-                    currency = post_data['code']
+                    currency = post_data['currency']
                     buy_cash = post_data['buy_cash']
                     buy_transfer = post_data['buy_transfer']
                     sell = post_data['sell']
