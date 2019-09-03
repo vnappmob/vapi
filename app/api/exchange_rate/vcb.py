@@ -59,9 +59,11 @@ def api_exchange_rate_vcb_get():
             if slash_settings['api'] == request_api:
                 statements = (
                     'SELECT t1.currency, t1.buy_cash, t1.buy_transfer, t1.sell '
-                    'FROM vnappmob_exchange_rate_vcb  t1 '
-                    'GROUP BY t1.currency '
-                    'ORDER by t1.currency, t1.datetime')
+                    'FROM vnappmob_exchange_rate_vcb t1 '
+                    'WHERE datetime IN ( '
+                    'SELECT MAX(datetime) FROM vnappmob_exchange_rate_vcb '
+                    'GROUP BY currency '
+                    ') ORDER BY t1.currency ASC')
                 try:
                     results = db_connect.readall(statements)
                     return make_response((jsonify({'results': results})), 200)
@@ -114,8 +116,11 @@ def api_exchange_rate_vcb_post():
 
                 latest_datas = db_connect.readall(
                     'SELECT t1.currency, t1.buy_cash, t1.buy_transfer, t1.sell '
-                    'FROM vnappmob_exchange_rate_vcb  t1 '
-                    'GROUP BY currency ORDER by t1.currency, t1.datetime')
+                    'FROM vnappmob_exchange_rate_vcb t1 '
+                    'WHERE datetime IN ( '
+                    'SELECT MAX(datetime) FROM vnappmob_exchange_rate_vcb '
+                    'GROUP BY currency '
+                    ') ORDER BY t1.currency ASC')
 
                 latest_datas_dict = defaultdict(list)
                 for data in latest_datas:
@@ -168,6 +173,7 @@ def insert_new_data(db_connect, currency, buy_cash, buy_transfer, sell):
                   "VALUES (NULL, %s, %s, %s, %s);")
     vals.extend((currency, buy_cash, buy_transfer, sell))
     db_connect.writecommit(statements, tuple(vals))
+
 
 def push_fcm():
     """Trigger push to FCM"""
