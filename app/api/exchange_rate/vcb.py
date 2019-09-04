@@ -60,8 +60,8 @@ def api_exchange_rate_vcb_get():
                 statements = (
                     'SELECT t1.currency, t1.buy_cash, t1.buy_transfer, t1.sell '
                     'FROM vnappmob_exchange_rate_vcb t1 '
-                    'WHERE datetime IN ( '
-                    'SELECT MAX(datetime) FROM vnappmob_exchange_rate_vcb '
+                    'WHERE id IN ( '
+                    'SELECT MAX(id) FROM vnappmob_exchange_rate_vcb '
                     'GROUP BY currency '
                     ') ORDER BY t1.currency ASC')
                 try:
@@ -117,8 +117,8 @@ def api_exchange_rate_vcb_post():
                 latest_datas = db_connect.readall(
                     'SELECT t1.currency, t1.buy_cash, t1.buy_transfer, t1.sell '
                     'FROM vnappmob_exchange_rate_vcb t1 '
-                    'WHERE datetime IN ( '
-                    'SELECT MAX(datetime) FROM vnappmob_exchange_rate_vcb '
+                    'WHERE id IN ( '
+                    'SELECT MAX(id) FROM vnappmob_exchange_rate_vcb '
                     'GROUP BY currency '
                     ') ORDER BY t1.currency ASC')
 
