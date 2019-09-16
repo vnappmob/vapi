@@ -10,6 +10,7 @@ services:
     #   restart_policy:
     #     condition: on-failure
     container_name: vapi
+    restart: always
     environment:
       ENV: production
       FLASK_ENV: production
