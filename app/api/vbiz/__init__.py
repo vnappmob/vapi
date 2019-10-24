@@ -50,17 +50,17 @@ def api_vbiz_search(keyword):
                 statements = (
                     "SELECT vbiz_code, vbiz_name "
                     "FROM vbiz "
-                    "WHERE vbiz_code like '" + keyword + "%%' LIMIT 0, 10")
+                    "WHERE vbiz_code like '" + keyword + "%%' LIMIT 0, 5")
             elif len(keyword) < 16:
                 statements = (
                     "SELECT vbiz_code, vbiz_name FROM vbiz "
                     "WHERE match(vbiz_name) "
-                    "AGAINST ('\"" + keyword + "\"' IN NATURAL LANGUAGE MODE) LIMIT 0, 10")
+                    "AGAINST ('\"" + keyword + "\"' IN NATURAL LANGUAGE MODE) LIMIT 0, 5")
             else:
                 statements = (
                     "SELECT vbiz_code, vbiz_name "
                     "FROM vbiz "
-                    "WHERE vbiz_name like '" + keyword + "%%' LIMIT 0, 10")
+                    "WHERE vbiz_name like '" + keyword + "%%' LIMIT 0, 5")
 
             try:
                 results = db_connect.readall(statements)
