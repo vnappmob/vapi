@@ -55,7 +55,7 @@ def api_vbiz_search(keyword):
                 statements = (
                     "SELECT vbiz_code, vbiz_name FROM vbiz "
                     "WHERE match(vbiz_name) "
-                    "AGAINST ('" + keyword + "' IN NATURAL LANGUAGE MODE) LIMIT 0, 10")
+                    "AGAINST ('\"" + keyword + "\"' IN NATURAL LANGUAGE MODE) LIMIT 0, 10")
             else:
                 statements = (
                     "SELECT vbiz_code, vbiz_name "
