@@ -46,12 +46,22 @@ def api_vbiz_search(keyword):
     db_connect = VDBConnect(db='vbiz_db')
     if db_connect.connected:
         try:
-            statements = (
-                "SELECT vbiz_name, vbiz_code "
-                "FROM vbiz "
-                "WHERE CONCAT_WS('', vbiz_name, vbiz_code) "
-                "COLLATE UTF8MB4_GENERAL_CI like '%%" + keyword + "%%' "
-                "LIMIT 0, 5;")
+            if keyword.isdigit():
+                statements = (
+                    "SELECT vbiz_code, vbiz_name "
+                    "FROM vbiz "
+                    "WHERE vbiz_code like '" + keyword + "%%' LIMIT 0, 10")
+            elif len(keyword) < 16:
+                statements = (
+                    "SELECT vbiz_code, vbiz_name FROM vbiz "
+                    "WHERE match(vbiz_name) "
+                    "AGAINST ('" + keyword + "' IN NATURAL LANGUAGE MODE) LIMIT 0, 10")
+            else:
+                statements = (
+                    "SELECT vbiz_code, vbiz_name "
+                    "FROM vbiz "
+                    "WHERE vbiz_name like '" + keyword + "%%' LIMIT 0, 10")
+
             try:
                 results = db_connect.readall(statements)
                 return make_response((jsonify({'results': results})), 200)
