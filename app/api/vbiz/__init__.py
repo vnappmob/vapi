@@ -4,6 +4,7 @@
 from flask import Blueprint, request, make_response, jsonify, current_app  # pylint: disable=W
 from app.db.db_connect import VDBConnect, MySQLdb
 from app.errors import error_response
+from app.helper.VietnameseHelper import VietnameseHelper
 
 bp = Blueprint('api_vbiz', __name__)  # pylint: disable=C
 
@@ -52,18 +53,24 @@ def api_vbiz_search(keyword):
                     "FROM vbiz "
                     "WHERE vbiz_code like '" + keyword + "%%' "
                     "LIMIT 0, 5")
-            elif len(keyword) < 16:
-                statements = (
-                    "SELECT vbiz_code, vbiz_name FROM vbiz "
-                    "WHERE match(vbiz_name) "
-                    "AGAINST ('\"" + keyword + "\"' IN NATURAL LANGUAGE MODE) "
-                    "LIMIT 0, 5")
             else:
-                statements = (
-                    "SELECT vbiz_code, vbiz_name "
-                    "FROM vbiz "
-                    "WHERE vbiz_name like '" + keyword + "%%' "
-                    "LIMIT 0, 5")
+                vh = VietnameseHelper()
+                cw = set([b'cong', b'cong ty', b'cong ty tnhh',
+                          b'cong ty co', b'cong ty co phan',
+                          b'doanh', b'doanh nghiep'])
+                if len(keyword) > 16 or cw.intersection(set(word for word in vh.no_accent_lower(keyword).split())):
+                    statements = (
+                        "SELECT vbiz_code, vbiz_name "
+                        "FROM vbiz "
+                        "WHERE vbiz_name like '" + keyword + "%%' "
+                        "LIMIT 0, 5")
+                else:
+                    statements = (
+                        "SELECT vbiz_code, vbiz_name FROM vbiz "
+                        "WHERE match(vbiz_name) "
+                        "AGAINST ('\"" + keyword +
+                        "\"' IN NATURAL LANGUAGE MODE) "
+                        "LIMIT 0, 5")
 
             try:
                 results = db_connect.readall(statements)
