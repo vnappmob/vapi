@@ -187,7 +187,7 @@ def api_vbiz_cat_get(vbiz_category_id):
             filter_email = request.args.get(
                 'filter_email', default=False, type=bool)
 
-            extras_where = " "
+            extras_where = "t1.vbiz_category_id = " + vbiz_category_id + " "
             extras_where += " AND t1.vbiz_register_date > '" + \
                 str(date_from) + "' " if date_from > 0 else ""
             extras_where += " AND t1.vbiz_register_date < '" + \
@@ -198,15 +198,21 @@ def api_vbiz_cat_get(vbiz_category_id):
             statements = (
                 "SELECT t1.* "
                 "FROM vbiz t1 "
-                "WHERE t1.vbiz_category_id = " + vbiz_category_id + extras_where + " "
+                "WHERE " + extras_where + " "
                 "ORDER BY t1.vbiz_register_timestamp DESC "
                 "LIMIT " + str(
                     (page - 1) * per_page) + ", " + str(per_page) + ";")
 
-            print(statements)
             try:
                 results = db_connect.readall(statements)
-                return make_response((jsonify({'results': results})), 200)
+                totals = db_connect.readall(
+                    "SELECT count(*) as total "
+                    "FROM vbiz t1"
+                    "WHERE " + extras_where + " ")
+                return make_response((jsonify({
+                    'results': results,
+                    'total': totals[0]['total']
+                })), 200)
             except MySQLdb.Error as err:  # pylint: disable=E
                 return error_response(400, str(err))
         finally:
