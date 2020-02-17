@@ -207,7 +207,7 @@ def api_vbiz_cat_get(vbiz_category_id):
                 results = db_connect.readall(statements)
                 totals = db_connect.readall(
                     "SELECT count(*) as total "
-                    "FROM vbiz t1"
+                    "FROM vbiz t1 "
                     "WHERE " + extras_where + " ")
                 return make_response((jsonify({
                     'results': results,
