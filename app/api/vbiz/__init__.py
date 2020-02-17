@@ -188,9 +188,9 @@ def api_vbiz_cat_get(vbiz_category_id):
                 'filter_email', default=False, type=bool)
 
             extras_where = "t1.vbiz_category_id = " + vbiz_category_id + " "
-            extras_where += " AND t1.vbiz_register_date > '" + \
+            extras_where += " AND t1.vbiz_register_timestamp > '" + \
                 str(date_from) + "' " if date_from > 0 else ""
-            extras_where += " AND t1.vbiz_register_date < '" + \
+            extras_where += " AND t1.vbiz_register_timestamp < '" + \
                 str(date_to) + "' " if date_to > 0 else ""
             extras_where += " AND t1.vbiz_phone <> '' " if filter_phone else ""
             extras_where += " AND t1.vbiz_email <> '' " if filter_email else ""
