@@ -179,7 +179,7 @@ def api_vbiz_cat_get(vbiz_category_id):
     if db_connect.connected:
         try:
             per_page = request.args.get('per_page', default=10, type=int)
-            page = request.args.get('page', default='1', type=int)
+            page = request.args.get('page', default=1, type=int)
             date_from = request.args.get('date_from', default=0, type=int)
             date_to = request.args.get('date_to', default=0, type=int)
             filter_phone = request.args.get(
@@ -187,17 +187,23 @@ def api_vbiz_cat_get(vbiz_category_id):
             filter_email = request.args.get(
                 'filter_email', default=False, type=bool)
 
-            extras_where += " AND vbiz_phone <> '' " if filter_phone else " "
-            extras_where += " AND vbiz_email <> '' " if filter_email else " "
+            extras_where = " "
+            extras_where += " AND t1.vbiz_register_date > '" + \
+                str(date_from) + "' " if date_from > 0 else ""
+            extras_where += " AND t1.vbiz_register_date < '" + \
+                str(date_to) + "' " if date_to > 0 else ""
+            extras_where += " AND t1.vbiz_phone <> '' " if filter_phone else ""
+            extras_where += " AND t1.vbiz_email <> '' " if filter_email else ""
 
             statements = (
                 "SELECT t1.* "
-                "FROM vbiz t1"
-                "WHERE t1.vbiz_category_id = '" + vbiz_category_id + "' "
-                "AND t1.vbiz_register_date > '" + date_from + "' "
-                "AND t1.vbiz_register_date < '" + date_to + "' " + extras_where + " "
-                "ORDER BY t1.vbiz_register_timestamp DESC, t1.vbiz_update_timestamp DESC "
-                "LIMIT " + str((page - 1) * per_page) + ", " + str(per_page) + ";")
+                "FROM vbiz t1 "
+                "WHERE t1.vbiz_category_id = " + vbiz_category_id + extras_where + " "
+                "ORDER BY t1.vbiz_register_timestamp DESC "
+                "LIMIT " + str(
+                    (page - 1) * per_page) + ", " + str(per_page) + ";")
+
+            print(statements)
             try:
                 results = db_connect.readall(statements)
                 return make_response((jsonify({'results': results})), 200)
