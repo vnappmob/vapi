@@ -137,7 +137,7 @@ def api_vbiz_get(vbiz_code):
 
 
 @bp.route('/api/vbiz/cat/<string:vbiz_category_id>', methods=['GET'])
-def api_vbiz_get(vbiz_category_id):
+def api_vbiz_cat_get(vbiz_category_id):
     """.. :quickref: 03. vBiz; Get list business with {vbiz_category_id}
 
     This function allows users to get list of Vietnamese business information
