@@ -9,10 +9,10 @@ from flask_limiter.util import get_remote_address
 
 from app.db.db_connect import VDBConnect, MySQLdb
 from app.errors import error_response
-from app.api.v1.province import bp as api_province_bp
-from app.api.v1.gold import bp as api_gold_bp
-from app.api.v1.exchange_rate import bp as api_exchange_rate_bp
-from app.api.v1.vbiz import bp as api_vbiz_bp
+from app.api.province import bp as api_province_bp
+from app.api.gold import bp as api_gold_bp
+from app.api.exchange_rate import bp as api_exchange_rate_bp
+from app.api.vbiz import bp as api_vbiz_bp
 
 FLASK_ENV = os.environ.get("FLASK_ENV", default='production')
 if FLASK_ENV == 'development':
@@ -35,7 +35,7 @@ class ProxiedRequest(Request):
 
 
 app = Flask(__name__, static_url_path='/',
-            static_folder='../docs/build/html/')  # pylint: disable=C
+            static_folder='build/html/')  # pylint: disable=C
 CORS(app)
 limiter = Limiter(app, key_func=get_remote_address)
 app.request_class = ProxiedRequest
@@ -49,9 +49,20 @@ app.register_blueprint(api_vbiz_bp)
 CURRENT_YEAR = time.strftime("%Y")
 BASE_TITLE = ('vAPI - Open API for Vietnamese projects')
 BASE_DESCRIPTION = ('Open API for Vietnamese projects')
+BASE_PHOTO = ('https://vnappmob.sgp1.cdn.digitaloceanspaces.com'
+              '/vnappmob/assets/img/vapi_photo.png')
+
+# just4fun
+
 
 @app.route('/')
 @app.route('/<path:path>')
 def static_file(path='index.html'):
     """static_file"""
     return app.send_static_file(path)
+
+
+# @app.route('/')
+# def index():
+#     """index"""
+#     return 'Hello - Please refer to the documentations on https://vapi-vnappmob.readthedocs.io/en/latest/'
