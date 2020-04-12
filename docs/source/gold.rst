@@ -5,7 +5,7 @@ Quick reference
 ########
 
 .. qrefflask:: app:app
-    :modules: app.api.gold
+    :modules: app.api.v1.gold
     :include-empty-docstring:
 
 
@@ -19,5 +19,5 @@ Details
 ########
 
 .. autoflask:: app:app
-    :modules: app.api.gold
+    :modules: app.api.v1.gold
     :include-empty-docstring:

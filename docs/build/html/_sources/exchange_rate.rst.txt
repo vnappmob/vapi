@@ -5,7 +5,7 @@ Quick reference
 ########
 
 .. qrefflask:: app:app
-    :modules: app.api.exchange_rate.vcb, app.api.exchange_rate.sbv
+    :modules: app.api.v1.exchange_rate.vcb, app.api.exchange_rate.sbv
     :include-empty-docstring:
 
 
@@ -19,5 +19,5 @@ Details
 ########
 
 .. autoflask:: app:app
-    :modules: app.api.exchange_rate.vcb, app.api.exchange_rate.sbv
+    :modules: app.api.v1.exchange_rate.vcb, app.api.exchange_rate.sbv
     :include-empty-docstring:

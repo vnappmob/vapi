@@ -5,12 +5,12 @@ Quick reference
 ########
 
 .. qrefflask:: app:app
-    :modules: app.api.vbiz
+    :modules: app.api.v1.vbiz
     :include-empty-docstring:
 
 Details
 ########
 
 .. autoflask:: app:app
-    :modules: app.api.vbiz
+    :modules: app.api.v1.vbiz
     :include-empty-docstring:
