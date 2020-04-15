@@ -1,7 +1,7 @@
 """app/__init__.py"""
 import os
 import time
-from flask import g, Flask, Request, request
+from flask import Flask, Request, g, jsonify, request, make_response
 
 from flask_cors import CORS
 from flask_limiter import Limiter
@@ -66,7 +66,10 @@ def request_api_key():
     scope = request.args.get('scope')
     permission = request.args.get('permission')
     dtl = request.args.get('dtl')
-    return generate_api_key(scope, permission, dtl)
+    responses = {
+        'results': generate_api_key(scope, permission, dtl)
+    }
+    return make_response((jsonify(responses)), 200)
 
 
 @app.before_request
