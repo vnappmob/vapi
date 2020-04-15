@@ -1,4 +1,8 @@
-"""app/api/gold.py"""
+"""
+.. :quickref:
+:deprecated:
+This module allows users to get gold data
+"""
 import requests
 from flask import Blueprint, request, make_response, jsonify, current_app  # pylint: disable=W
 from app.db.db_connect import VDBConnect, MySQLdb

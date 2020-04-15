@@ -11,7 +11,5 @@ If you need more information, please hook us at contact@vnappmob.com
 ## Documentation
 
 ```
-cd docs
-make clean
-make html
+cd docs && make clean && make html && cd ..
 ```

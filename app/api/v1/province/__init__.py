@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""app/api/province.py
+""".. :quickref:
+This module allows users to get a list of province, district & ward in Vietnam
 """
 from flask import Blueprint, request, make_response, jsonify, current_app  # pylint: disable=W
 from app.db.db_connect import VDBConnect, MySQLdb

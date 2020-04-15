@@ -1,5 +1,7 @@
-vAPI - Province API
+Province API
 =====================
+
+.. automodule:: app.api.v1.province
 
 Quick reference
 ########

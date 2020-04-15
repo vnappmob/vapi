@@ -1,5 +1,7 @@
-vAPI - Gold Price API
+Gold Price API
 =====================
+
+.. automodule:: app.api.v1.gold
 
 Quick reference
 ########

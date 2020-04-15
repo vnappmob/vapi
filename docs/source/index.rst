@@ -12,9 +12,10 @@ Welcome to vAPI's documentation!
 
    author.md
    province
-   vbiz
    gold
+   gold.v2
    exchange_rate
+   vbiz
 
 
 Indices and tables

@@ -1,4 +1,4 @@
-vAPI - Vietnamese Business vBiz API
+vBiz API
 =====================
 
 Quick reference

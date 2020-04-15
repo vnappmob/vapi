@@ -21,6 +21,12 @@ class DevelopmentConfig(Config):
         'db_password': '123456',
         'db_port': 3306
     }
+    MONGODB_CONFIG = {
+        'db_host': os.environ.get('MONGODB_HOST') or '',
+        'db_user': os.environ.get('MONGODB_USER') or '',
+        'db_password': os.environ.get('MONGODB_PASSWORD') or '',
+        'db_port': os.environ.get('MONGODB_PORT') or '27017'
+    }
 
 
 class TestingConfig(Config):
@@ -37,4 +43,10 @@ class ProductionConfig(Config):
         'db_user': os.environ.get('DB_USER') or '',
         'db_password': os.environ.get('DB_PASSWORD') or '',
         'db_port': 3306
+    }
+    MONGODB_CONFIG = {
+        'db_host': os.environ.get('MONGODB_HOST') or '',
+        'db_user': os.environ.get('MONGODB_USER') or '',
+        'db_password': os.environ.get('MONGODB_PASSWORD') or '',
+        'db_port': os.environ.get('MONGODB_PORT') or '27017'
     }

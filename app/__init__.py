@@ -1,16 +1,18 @@
 """app/__init__.py"""
 import os
 import time
-from flask import Flask, Request, request
+from flask import g, Flask, Request, request
 
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
+from app.api.auth import generate_api_key
 from app.db.db_connect import VDBConnect, MySQLdb
 from app.errors import error_response
 from app.api.v1.province import bp as api_province_bp
 from app.api.v1.gold import bp as api_gold_bp
+from app.api.v2.gold import bp as api_v2_gold_bp
 from app.api.v1.exchange_rate import bp as api_exchange_rate_bp
 from app.api.v1.vbiz import bp as api_vbiz_bp
 
@@ -43,6 +45,7 @@ app.config.from_object(AppConfig)
 
 app.register_blueprint(api_province_bp)
 app.register_blueprint(api_gold_bp)
+app.register_blueprint(api_v2_gold_bp)
 app.register_blueprint(api_exchange_rate_bp)
 app.register_blueprint(api_vbiz_bp)
 
@@ -50,8 +53,28 @@ CURRENT_YEAR = time.strftime("%Y")
 BASE_TITLE = ('vAPI - Open API for Vietnamese projects')
 BASE_DESCRIPTION = ('Open API for Vietnamese projects')
 
+
 @app.route('/')
 @app.route('/<path:path>')
 def static_file(path='index.html'):
     """static_file"""
     return app.send_static_file(path)
+
+
+@app.route('/api/request_api_key')
+def request_api_key():
+    scope = request.args.get('scope')
+    permission = request.args.get('permission')
+    dtl = request.args.get('dtl')
+    return generate_api_key(scope, permission, dtl)
+
+
+@app.before_request
+def before_request():
+    g.start = time.time()
+
+
+@app.after_request
+def after_request(response):
+    print('total: %s' % (time.time() - g.start))
+    return response

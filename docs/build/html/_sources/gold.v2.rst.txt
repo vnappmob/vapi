@@ -1,13 +1,13 @@
-Gold Price API
+Gold Price API (version 2)
 =====================
 
-.. automodule:: app.api.v1.gold
+.. automodule:: app.api.v2.gold
 
 Quick reference
 ########
 
 .. qrefflask:: app:app
-    :modules: app.api.v1.gold
+    :modules: app.api.v2.gold
     :include-empty-docstring:
 
 
@@ -21,5 +21,5 @@ Details
 ########
 
 .. autoflask:: app:app
-    :modules: app.api.v1.gold
+    :modules: app.api.v2.gold
     :include-empty-docstring:

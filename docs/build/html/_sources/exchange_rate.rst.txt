@@ -1,4 +1,4 @@
-vAPI - Exchange rate API
+Exchange rate API
 =====================
 
 Quick reference

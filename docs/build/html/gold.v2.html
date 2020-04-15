@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Gold Price API &mdash; vAPI 0.1.1 documentation</title>
+  <title>Gold Price API (version 2) &mdash; vAPI 0.1.1 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Gold Price API (version 2)" href="gold.v2.html" />
-    <link rel="prev" title="Province API" href="province.html" /> 
+    <link rel="next" title="Exchange rate API" href="exchange_rate.html" />
+    <link rel="prev" title="Gold Price API" href="gold.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,13 +84,13 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="author.html">Authors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="province.html">Province API</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Gold Price API</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="gold.html">Gold Price API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Gold Price API (version 2)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#quick-reference">Quick reference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage-permission">Usage permission</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#details">Details</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="gold.v2.html">Gold Price API (version 2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exchange_rate.html">Exchange rate API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vbiz.html">vBiz API</a></li>
 </ul>
@@ -138,13 +138,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Gold Price API</li>
+      <li>Gold Price API (version 2)</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/gold.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/gold.v2.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -157,13 +157,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-app.api.v1.gold">
-<span id="gold-price-api"></span><h1>Gold Price API<a class="headerlink" href="#module-app.api.v1.gold" title="Permalink to this headline">¶</a></h1>
-<dl class="field-list simple">
-<dt class="field-odd">deprecated</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<p>This module allows users to get gold data</p>
+  <div class="section" id="gold-price-api-version-2">
+<h1>Gold Price API (version 2)<a class="headerlink" href="#gold-price-api-version-2" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-app.api.v2.gold"></span><p>This module allows users to get gold data</p>
 <div class="section" id="quick-reference">
 <h2>Quick reference<a class="headerlink" href="#quick-reference" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-given docutils align-default">
@@ -183,22 +179,22 @@
 <li><p>SJC Price</p></li>
 </ol>
 </td>
-<td><p><a class="reference external" href="#get--api-gold-sjc">GET /api/gold/sjc</a></p></td>
+<td><p><a class="reference external" href="#get--api-v2-gold-sjc">GET /api/v2/gold/sjc</a></p></td>
 <td><p>Get SJC Gold Price</p></td>
 </tr>
 <tr class="row-odd"><td></td>
-<td><p><a class="reference external" href="#post--api-gold-sjc">POST /api/gold/sjc</a></p></td>
+<td><p><a class="reference external" href="#post--api-v2-gold-sjc">POST /api/v2/gold/sjc</a></p></td>
 <td><p>Post SJC Gold Price</p></td>
 </tr>
 <tr class="row-even"><td><ol class="arabic simple" start="2">
 <li><p>DOJI Price</p></li>
 </ol>
 </td>
-<td><p><a class="reference external" href="#get--api-gold-doji">GET /api/gold/doji</a></p></td>
+<td><p><a class="reference external" href="#get--api-v2-gold-doji">GET /api/v2/gold/doji</a></p></td>
 <td><p>Get DOJI Gold Price</p></td>
 </tr>
 <tr class="row-odd"><td></td>
-<td><p><a class="reference external" href="#post--api-gold-doji">POST /api/gold/doji</a></p></td>
+<td><p><a class="reference external" href="#post--api-v2-gold-doji">POST /api/v2/gold/doji</a></p></td>
 <td><p>Post DOJI Gold Price</p></td>
 </tr>
 </tbody>
@@ -211,11 +207,11 @@
 <div class="section" id="details">
 <h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
 <dl class="get">
-<dt id="get--api-gold-doji">
-<code class="sig-name descname">GET </code><code class="sig-name descname">/api/gold/doji</code><a class="headerlink" href="#get--api-gold-doji" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-v2-gold-doji">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/api/v2/gold/doji</code><a class="headerlink" href="#get--api-v2-gold-doji" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function allows users to get the latest DOJI Gold price</p>
 <p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/api/gold/doji</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/api/v2/gold/doji</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">https://vapi.vnappmob.com</span>
 <span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
 </pre></div>
@@ -238,38 +234,36 @@
 <dl class="field-list simple">
 <dt class="field-odd">Query Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>api_key</strong> – API Key generated by VNAppMob</p></li>
 <li><p><strong>date_from</strong> – Set date from query</p></li>
 <li><p><strong>date_to</strong> – Set date to query</p></li>
 </ul>
 </dd>
-<dt class="field-even">Response Headers</dt>
+<dt class="field-even">Request Headers</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – Bearer &lt;api_key|scope=gold|permission=1&gt;</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Response JSON Object</dt>
+<dt class="field-odd">Response Headers</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>buy_hcm</strong> (<em>float</em>) – Buy 1L in HCM market</p></li>
-<li><p><strong>sell_hcm</strong> (<em>float</em>) – Sell 1L in HCM market</p></li>
-<li><p><strong>buy_hn</strong> (<em>float</em>) – Buy 1L in HN market</p></li>
-<li><p><strong>sell_hn</strong> (<em>float</em>) – Sell 1L in HN market</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
 </ul>
 </dd>
 <dt class="field-even">Status Codes</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – results</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – OK</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> – Fail on authorization</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="post">
-<dt id="post--api-gold-doji">
-<code class="sig-name descname">POST </code><code class="sig-name descname">/api/gold/doji</code><a class="headerlink" href="#post--api-gold-doji" title="Permalink to this definition">¶</a></dt>
-<dd><p>Limited function that allows data manager to push newest price</p>
+<dt id="post--api-v2-gold-doji">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/api/v2/gold/doji</code><a class="headerlink" href="#post--api-v2-gold-doji" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function allows data manager to push newest data</p>
 <p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/gold/doji</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/v2/gold/doji</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">https://vapi.vnappmob.com</span>
 <span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
 </pre></div>
@@ -280,9 +274,9 @@
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Response Headers</dt>
+<dt class="field-odd">Request Headers</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – API Key generated by VNAppMob</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – Bearer &lt;api_key|scope=gold|permission=2&gt;</p></li>
 <li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
 </ul>
 </dd>
@@ -296,72 +290,73 @@
 </dd>
 <dt class="field-odd">Status Codes</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a> – Successful update data</p></li>
-<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> – Invalid api_key</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a> – Successful</p></li>
 <li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> – Fail on authorization</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="get">
-<dt id="get--api-gold-sjc">
-<code class="sig-name descname">GET </code><code class="sig-name descname">/api/gold/sjc</code><a class="headerlink" href="#get--api-gold-sjc" title="Permalink to this definition">¶</a></dt>
+<dt id="get--api-v2-gold-sjc">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/api/v2/gold/sjc</code><a class="headerlink" href="#get--api-v2-gold-sjc" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function allows users to get the latest SJC Gold price</p>
 <p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/api/gold/sjc</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/api/v2/gold/sjc</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">https://vapi.vnappmob.com</span>
 <span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
 </pre></div>
 </div>
 <p><strong>Response</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json
 
-<span class="p">{</span>
-    <span class="nt">&quot;results&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&quot;buy_1l&quot;</span><span class="p">:</span> <span class="mf">42550000.00</span><span class="p">,</span>
-            <span class="nt">&quot;sell_1l&quot;</span><span class="p">:</span> <span class="mf">42550000.00</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
+{
+    &quot;results&quot;: [
+        {
+            &quot;buy_1l&quot;: 42550000.00,
+            &quot;sell_1l&quot;: 42550000.00,
+            ...
+        }
+    ]
+}
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Query Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>api_key</strong> – API Key generated by VNAppMob</p></li>
 <li><p><strong>date_from</strong> – Set date from query</p></li>
 <li><p><strong>date_to</strong> – Set date to query</p></li>
 </ul>
 </dd>
-<dt class="field-even">Response Headers</dt>
+<dt class="field-even">Request Headers</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – Bearer &lt;api_key|scope=gold|permission=1&gt;</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Response JSON Object</dt>
+<dt class="field-odd">Response Headers</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>buy_1l</strong> (<em>float</em>) – Buy 1L</p></li>
-<li><p><strong>sell_1l</strong> (<em>float</em>) – Sell 1L</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
 </ul>
 </dd>
 <dt class="field-even">Status Codes</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – results</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – OK</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> – Fail on authorization</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="post">
-<dt id="post--api-gold-sjc">
-<code class="sig-name descname">POST </code><code class="sig-name descname">/api/gold/sjc</code><a class="headerlink" href="#post--api-gold-sjc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Limited function that allows data manager to push newest price</p>
+<dt id="post--api-v2-gold-sjc">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/api/v2/gold/sjc</code><a class="headerlink" href="#post--api-v2-gold-sjc" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function allows data manager to push newest data</p>
 <p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/gold/sjc</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/v2/gold/sjc</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">https://vapi.vnappmob.com</span>
 <span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
 </pre></div>
@@ -372,9 +367,9 @@
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Response Headers</dt>
+<dt class="field-odd">Request Headers</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – API Key generated by VNAppMob</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – Bearer &lt;api_key|scope=gold|permission=2&gt;</p></li>
 <li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
 </ul>
 </dd>
@@ -392,9 +387,9 @@
 </dd>
 <dt class="field-odd">Status Codes</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a> – Successful update data</p></li>
-<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> – Invalid api_key</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a> – Successful</p></li>
 <li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> – Fail on authorization</p></li>
 </ul>
 </dd>
 </dl>
@@ -411,10 +406,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="gold.v2.html" class="btn btn-neutral float-right" title="Gold Price API (version 2)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="exchange_rate.html" class="btn btn-neutral float-right" title="Exchange rate API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="province.html" class="btn btn-neutral float-left" title="Province API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="gold.html" class="btn btn-neutral float-left" title="Gold Price API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
