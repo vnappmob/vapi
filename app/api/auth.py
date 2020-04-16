@@ -23,7 +23,7 @@ def require_api_key(scope='', permission=0):
                     api_key,
                     current_app.config.get('SECRET_KEY')
                 )
-                
+
                 if scope != payload['scope']:
                     raise Exception('Out of scope')
 
@@ -39,7 +39,7 @@ def require_api_key(scope='', permission=0):
     return actual_decorator
 
 
-def generate_api_key(scope, permission, dtl=15):
+def generate_api_key(**kwargs):
     """
     Generates the Auth Token
     :scope: string | (gold, exchange_rate)
@@ -47,6 +47,10 @@ def generate_api_key(scope, permission, dtl=15):
     :return: string
     """
     try:
+        scope = kwargs['scope'] if 'scope' in kwargs and kwargs['scope'] is not None else '*'
+        permission = kwargs['permission'] if 'permission' in kwargs and kwargs['permission'] is not None else 0
+        dtl = int(kwargs['dtl']) if 'dtl' in kwargs and kwargs['dtl'] is not None else 15
+
         payload = {
             'exp': datetime.datetime.utcnow() + datetime.timedelta(days=dtl),
             'iat': datetime.datetime.utcnow(),

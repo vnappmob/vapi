@@ -63,11 +63,12 @@ def static_file(path='index.html'):
 
 @app.route('/api/request_api_key')
 def request_api_key():
-    scope = request.args.get('scope')
-    permission = request.args.get('permission')
-    dtl = request.args.get('dtl')
     responses = {
-        'results': generate_api_key(scope, permission, dtl)
+        'results': generate_api_key(
+            scope=request.args.get('scope'),
+            permission=request.args.get('permission'),
+            dtl=request.args.get('dtl')
+        )
     }
     return make_response((jsonify(responses)), 200)
 

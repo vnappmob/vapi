@@ -51,7 +51,7 @@ def api_v2_gold_sjc_get():
 
     :query date_from: Set date from query
     :query date_to: Set date to query
-    :reqheader Authorization: Bearer <api_key|scope=gold|permission=1>
+    :reqheader Authorization: Bearer <api_key|scope=gold|permission=0>
     :resheader Content-Type: application/json
     :status 200: OK
     :status 400: Error
@@ -119,7 +119,7 @@ def api_v2_gold_sjc_post():
       HTTP/1.1 201 Created
       Vary: Accept
 
-    :reqheader Authorization: Bearer <api_key|scope=gold|permission=2>
+    :reqheader Authorization: Bearer <api_key|scope=gold|permission=1>
     :reqheader Content-Type: application/json
     :<json float buy_1l: buy_1l
     :<json float sell_1l: sell_1l
@@ -224,7 +224,7 @@ def api_v2_gold_doji_get():
 
     :query date_from: Set date from query
     :query date_to: Set date to query
-    :reqheader Authorization: Bearer <api_key|scope=gold|permission=1>
+    :reqheader Authorization: Bearer <api_key|scope=gold|permission=0>
     :resheader Content-Type: application/json
     :status 200: OK
     :status 400: Error
@@ -292,7 +292,7 @@ def api_v2_gold_doji_post():
       HTTP/1.1 201 Created
       Vary: Accept
 
-    :reqheader Authorization: Bearer <api_key|scope=gold|permission=2>
+    :reqheader Authorization: Bearer <api_key|scope=gold|permission=1>
     :reqheader Content-Type: application/json
     :<json float buy_hcm: buy_hcm
     :<json float sell_hcm: sell_hcm
