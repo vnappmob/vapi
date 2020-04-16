@@ -6,6 +6,7 @@ services:
     environment:
       ENV: production
       FLASK_ENV: production
+      TZ: Asia/Ho_Chi_Minh
       DB_HOST: $DB_HOST
       DB_USER: $DB_USER
       DB_PASSWORD: $DB_PASSWORD
