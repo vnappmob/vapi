@@ -1,13 +1,13 @@
-Gold Price API (version 2)
+Exchange rate API (version 2)
 =====================
 
-.. automodule:: app.api.v2.gold
+.. automodule:: app.api.v2.exchange_rate
 
 Quick reference
 ########
 
 .. qrefflask:: app:app
-    :modules: app.api.v2.gold
+    :modules: app.api.v2.exchange_rate.vcb
     :include-empty-docstring:
 
 
@@ -21,5 +21,5 @@ Details
 ########
 
 .. autoflask:: app:app
-    :modules: app.api.v2.gold
+    :modules: app.api.v2.exchange_rate.vcb
     :include-empty-docstring:
