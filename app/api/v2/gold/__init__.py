@@ -1,17 +1,19 @@
 """.. :quickref:
 This module allows users to get gold data
 """
+import datetime
+import os
+
 import requests
-from flask import Blueprint, request, make_response, jsonify, current_app  # pylint: disable=W
+from bson.decimal128 import Decimal128
+from flask import Blueprint, current_app, jsonify, make_response, request
+
+from app.api.auth import require_api_key
 from app.db.mongodb_connect import MongoDBConnect
 from app.errors import error_response
-from app.api.auth import require_api_key
 from app.helper import PostFCM
-import os
-from bson.decimal128 import Decimal128
-import datetime
 
-bp = Blueprint('api_v2_gold', __name__)  # pylint: disable=C
+bp = Blueprint('api_v2_gold', __name__)
 
 SCOPE = 'gold'
 
@@ -136,10 +138,10 @@ def api_v2_gold_sjc_post():
     try:
         db_connect = MongoDBConnect()
         collection = 'gold_sjc'
-        fcm = request.args.get('fcm', default=False, type=bool)
+        fcm = request.args.get('fcm', default=0, type=int)
         json_data = request.get_json()
 
-        if fcm:
+        if fcm == 1:
             fcm_data = (
                 '{"notification": {"title": "vPrice - Biến động giá SJC"'
                 ',"body": "1L: Mua ' + '{:,d}'.format(
@@ -178,9 +180,9 @@ def api_v2_gold_sjc_post():
             json_data['datetime'] = datetime.datetime.now()
             db_connect.connection['vapi'][collection].insert_one(json_data)
 
-            if fcm:
-                fcm_response = PostFCM(fcm_data)
-                print(fcm_response)
+            if fcm == 1:
+                fcm_response = PostFCM.post_fcm(fcm_data)
+                print(fcm_response.status_code, fcm_response.text)
 
             return make_response((jsonify({'results': 201})), 201)
         return make_response((jsonify({'results': 200})), 200)
@@ -305,10 +307,10 @@ def api_v2_gold_doji_post():
     try:
         db_connect = MongoDBConnect()
         collection = 'gold_doji'
-        fcm = request.args.get('fcm', default=False, type=bool)
+        fcm = request.args.get('fcm', default=0, type=int)
         json_data = request.get_json()
 
-        if fcm:
+        if fcm == 1:
             fcm_data = (
                 '{"notification": {"title": "vPrice - Biến động giá DOJI"'
                 ',"body": "HCM: Mua ' + '{:,d}'.format(
@@ -344,9 +346,9 @@ def api_v2_gold_doji_post():
             json_data['datetime'] = datetime.datetime.now()
             db_connect.connection['vapi'][collection].insert_one(json_data)
 
-            if fcm:
-                fcm_response = PostFCM(fcm_data)
-                print(fcm_response)
+            if fcm == 1:
+                fcm_response = PostFCM.post_fcm(fcm_data)
+                print(fcm_response.status_code, fcm_response.text)
 
             return make_response((jsonify({'results': 201})), 201)
         return make_response((jsonify({'results': 200})), 200)

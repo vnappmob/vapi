@@ -1,8 +1,10 @@
+import datetime
+from functools import wraps
+
 import jwt
 from flask import current_app, request
+
 from app.errors import error_response
-from functools import wraps
-import datetime
 
 
 def require_api_key(scope='', permission=0):
@@ -24,7 +26,7 @@ def require_api_key(scope='', permission=0):
                     current_app.config.get('SECRET_KEY')
                 )
 
-                if scope != payload['scope']:
+                if payload['scope'] != '*' and payload['scope'] != scope:
                     raise Exception('Out of scope')
 
                 if permission > int(payload['permission']):
@@ -49,7 +51,8 @@ def generate_api_key(**kwargs):
     try:
         scope = kwargs['scope'] if 'scope' in kwargs and kwargs['scope'] is not None else '*'
         permission = kwargs['permission'] if 'permission' in kwargs and kwargs['permission'] is not None else 0
-        dtl = int(kwargs['dtl']) if 'dtl' in kwargs and kwargs['dtl'] is not None else 15
+        dtl = int(
+            kwargs['dtl']) if 'dtl' in kwargs and kwargs['dtl'] is not None else 15
 
         payload = {
             'exp': datetime.datetime.utcnow() + datetime.timedelta(days=dtl),

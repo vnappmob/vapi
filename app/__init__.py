@@ -14,6 +14,7 @@ from app.api.v1.province import bp as api_province_bp
 from app.api.v1.gold import bp as api_gold_bp
 from app.api.v2.gold import bp as api_v2_gold_bp
 from app.api.v1.exchange_rate import bp as api_exchange_rate_bp
+from app.api.v2.exchange_rate import bp as api_v2_exchange_rate_bp
 from app.api.v1.vbiz import bp as api_vbiz_bp
 
 FLASK_ENV = os.environ.get("FLASK_ENV", default='production')
@@ -47,6 +48,7 @@ app.register_blueprint(api_province_bp)
 app.register_blueprint(api_gold_bp)
 app.register_blueprint(api_v2_gold_bp)
 app.register_blueprint(api_exchange_rate_bp)
+app.register_blueprint(api_v2_exchange_rate_bp)
 app.register_blueprint(api_vbiz_bp)
 
 CURRENT_YEAR = time.strftime("%Y")
