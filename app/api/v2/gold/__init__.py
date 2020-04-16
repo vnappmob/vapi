@@ -175,7 +175,7 @@ def api_v2_gold_sjc_post():
                 changed = True
 
         if changed:
-            json_data['datetime'] = datetime.datetime.utcnow()
+            json_data['datetime'] = datetime.datetime.now()
             db_connect.connection['vapi'][collection].insert_one(json_data)
 
             if fcm:
@@ -341,7 +341,7 @@ def api_v2_gold_doji_post():
                 changed = True
 
         if changed:
-            json_data['datetime'] = datetime.datetime.utcnow()
+            json_data['datetime'] = datetime.datetime.now()
             db_connect.connection['vapi'][collection].insert_one(json_data)
 
             if fcm:
