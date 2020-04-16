@@ -15,6 +15,7 @@ Welcome to vAPI's documentation!
    gold
    gold.v2
    exchange_rate
+   exchange_rate.v2
    vbiz
 
 
