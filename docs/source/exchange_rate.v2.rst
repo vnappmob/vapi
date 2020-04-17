@@ -7,7 +7,7 @@ Quick reference
 ########
 
 .. qrefflask:: app:app
-    :modules: app.api.v2.exchange_rate.vcb
+    :modules: app.api.v2.exchange_rate.vcb, app.api.v2.exchange_rate.ctg
     :include-empty-docstring:
 
 
@@ -23,5 +23,5 @@ Details
 ########
 
 .. autoflask:: app:app
-    :modules: app.api.v2.exchange_rate.vcb
+    :modules: app.api.v2.exchange_rate.vcb, app.api.v2.exchange_rate.ctg
     :include-empty-docstring:
