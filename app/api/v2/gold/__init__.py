@@ -1,7 +1,7 @@
 """.. :quickref:
 This module allows users to get gold data
 """
-import datetime
+import datetime as dt
 import os
 
 import requests
@@ -65,18 +65,16 @@ def api_v2_gold_sjc_get():
         date_from = request.args.get('date_from', default=0, type=int)
         date_to = request.args.get('date_to', default=0, type=int)
 
-        filter = {}
-        sort = list({
-            'datetime': -1
-        }.items())
-        limit = 1
+        if date_from != 0 and date_to != 0 and date_from < date_to:
+            query = get_query(
+                type=1,
+                date_from=dt.datetime.fromtimestamp(date_from),
+                date_to=dt.datetime.fromtimestamp(date_to)
+            )
+        else:
+            query = get_query(type=0)
 
-        q_res = db_connect.connection['vapi'][collection].find(
-            filter=filter,
-            sort=sort,
-            skip=0,
-            limit=limit
-        )
+        q_res = db_connect.connection['vapi'][collection].aggregate(query)
 
         results = []
         for result in q_res:
@@ -177,7 +175,7 @@ def api_v2_gold_sjc_post():
                 changed = True
 
         if changed:
-            json_data['datetime'] = datetime.datetime.now()
+            json_data['datetime'] = dt.datetime.now()
             db_connect.connection['vapi'][collection].insert_one(json_data)
 
             if fcm == 1:
@@ -238,18 +236,16 @@ def api_v2_gold_doji_get():
         date_from = request.args.get('date_from', default=0, type=int)
         date_to = request.args.get('date_to', default=0, type=int)
 
-        filter = {}
-        sort = list({
-            'datetime': -1
-        }.items())
-        limit = 1
+        if date_from != 0 and date_to != 0 and date_from < date_to:
+            query = get_query(
+                type=1,
+                date_from=dt.datetime.fromtimestamp(date_from),
+                date_to=dt.datetime.fromtimestamp(date_to)
+            )
+        else:
+            query = get_query(type=0)
 
-        q_res = db_connect.connection['vapi'][collection].find(
-            filter=filter,
-            sort=sort,
-            skip=0,
-            limit=limit
-        )
+        q_res = db_connect.connection['vapi'][collection].aggregate(query)
 
         results = []
         for result in q_res:
@@ -343,7 +339,7 @@ def api_v2_gold_doji_post():
                 changed = True
 
         if changed:
-            json_data['datetime'] = datetime.datetime.now()
+            json_data['datetime'] = dt.datetime.now()
             db_connect.connection['vapi'][collection].insert_one(json_data)
 
             if fcm == 1:
@@ -356,3 +352,50 @@ def api_v2_gold_doji_post():
         return error_response(400, str(e))
     finally:
         db_connect.connection.close()
+
+
+def get_query(type=0, **kwargs):
+    query = False
+    if type == 0:
+        query = [
+            {
+                '$sort': {
+                    'datetime': -1
+                }
+            }, {
+                '$limit': 1
+            }
+        ]
+    elif type == 1:
+        dnow = dt.datetime.now()
+        date_from = kwargs['date_from'] if 'date_from' in kwargs else dnow - \
+            dt.timedelta(30)
+        date_to = kwargs['date_to'] if 'date_to' in kwargs else dnow
+        query = [
+            {
+                '$match': {
+                    'datetime': {
+                        '$gte': date_from,
+                        '$lt': date_to
+                    }
+                }
+            }, {
+                '$group': {
+                    '_id': {
+                        '$dayOfYear': '$datetime'
+                    },
+                    'temp_data': {
+                        '$first': '$$ROOT'
+                    }
+                }
+            }, {
+                '$sort': {
+                    '_id': 1
+                }
+            }, {
+                '$replaceRoot': {
+                    'newRoot': '$temp_data'
+                }
+            }
+        ]
+    return query

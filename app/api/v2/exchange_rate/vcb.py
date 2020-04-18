@@ -1,4 +1,4 @@
-"""app/api/exchange_rate/vcb.py"""
+"""app/api/v2/exchange_rate/vcb.py"""
 import datetime
 from collections import defaultdict
 
@@ -212,7 +212,7 @@ def api_v2_exchange_rate_vcb_post():
         changed = False
 
         for k, v in post_dict.items():
-            if post_dict[k] != current_dict[k]:
+            if k not in current_dict or post_dict[k] != current_dict[k]:
                 changed = True
                 new_doc = {
                     "datetime": datetime.datetime.now(),
