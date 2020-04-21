@@ -1,4 +1,4 @@
-"""app/api/v2/exchange_rate/ctg.py"""
+"""app/api/v2/exchange_rate/tcb.py"""
 import datetime
 from collections import defaultdict
 
@@ -15,18 +15,18 @@ from app.helper import PostFCM
 SCOPE = 'exchange_rate'
 
 
-@bp.route('/api/v2/exchange_rate/ctg', methods=['GET'])
+@bp.route('/api/v2/exchange_rate/tcb', methods=['GET'])
 @require_api_key(scope=SCOPE, permission=0)
-def api_v2_exchange_rate_ctg_get():
-    """.. :quickref: 02. Vietinbank (CTG); Get all Vietinbank (CTG) exchange rate
+def api_v2_exchange_rate_tcb_get():
+    """.. :quickref: 03. Techcombank (TCB); Get all Techcombank (TCB) exchange rate
 
-    This function allows users to get the latest Vietinbank (CTG) exchange rate
+    This function allows users to get the latest Techcombank (TCB) exchange rate
 
     **Request**:
 
     .. sourcecode:: http
 
-      GET /api/v2/exchange_rate/ctg HTTP/1.1
+      GET /api/v2/exchange_rate/tcb HTTP/1.1
       Host: https://vapi.vnappmob.com
       Accept: application/json
 
@@ -63,7 +63,7 @@ def api_v2_exchange_rate_ctg_get():
     """
     try:
         db_connect = MongoDBConnect()
-        collection = 'exchange_rate_ctg'
+        collection = 'exchange_rate_tcb'
 
         q_res = db_connect.connection['vapi'][collection].aggregate([
             {
@@ -120,10 +120,10 @@ def api_v2_exchange_rate_ctg_get():
         db_connect.connection.close()
 
 
-@bp.route('/api/v2/exchange_rate/ctg', methods=['POST'])
+@bp.route('/api/v2/exchange_rate/tcb', methods=['POST'])
 @require_api_key(scope=SCOPE, permission=1)
-def api_v2_exchange_rate_ctg_post():
-    """.. :quickref: 02. Vietinbank (CTG); Post new exchange rate
+def api_v2_exchange_rate_tcb_post():
+    """.. :quickref: 03. Techcombank (TCB); Post new exchange rate
 
     This function allows data manager to push newest data
 
@@ -131,7 +131,7 @@ def api_v2_exchange_rate_ctg_post():
 
     .. sourcecode:: http
 
-      POST /api/v2/exchange_rate/ctg HTTP/1.1
+      POST /api/v2/exchange_rate/tcb HTTP/1.1
       Host: https://vapi.vnappmob.com
       Accept: application/json
 
@@ -155,7 +155,7 @@ def api_v2_exchange_rate_ctg_post():
     """
     try:
         db_connect = MongoDBConnect()
-        collection = 'exchange_rate_ctg'
+        collection = 'exchange_rate_tcb'
         fcm = request.args.get('fcm', default=0, type=int)
         json_data = request.get_json()
 
@@ -222,13 +222,13 @@ def api_v2_exchange_rate_ctg_post():
                 db_connect.connection['vapi'][collection].insert_one(new_doc)
                 if fcm == 1:
                     fcm_data = (
-                        '{"notification": {"title": "vPrice - Biến động tỷ giá Vietinbank (CTG)-%s",'
+                        '{"notification": {"title": "vPrice - Biến động tỷ giá Techcombank (TCB)-%s",'
                         '"body": "Mua tiền mặt: %s'
                         '\nMua chuyển khoản: %s'
                         '\nBán: %s","sound": "default"},"priority": "high",'
                         '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                        '"id": "/topics/exchange_rate/ctg/%s","status": "done"},'
-                        '"to": "/topics/exchange_rate/ctg/%s"}' %
+                        '"id": "/topics/exchange_rate/tcb/%s","status": "done"},'
+                        '"to": "/topics/exchange_rate/tcb/%s"}' %
                         (
                             new_doc['currency'],
                             '{:,.2f}'.format(new_doc['buy_cash']),
