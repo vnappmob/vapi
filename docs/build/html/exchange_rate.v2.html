@@ -209,6 +209,17 @@
 <td><p><a class="reference external" href="#post--api-v2-exchange_rate-tcb">POST /api/v2/exchange_rate/tcb</a></p></td>
 <td><p>Post new exchange rate</p></td>
 </tr>
+<tr class="row-even"><td><ol class="arabic simple" start="4">
+<li><p>BIDV</p></li>
+</ol>
+</td>
+<td><p><a class="reference external" href="#get--api-v2-exchange_rate-bid">GET /api/v2/exchange_rate/bid</a></p></td>
+<td><p>Get all BIDV exchange rate</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><a class="reference external" href="#post--api-v2-exchange_rate-bid">POST /api/v2/exchange_rate/bid</a></p></td>
+<td><p>Post new exchange rate</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -469,6 +480,101 @@ Content-Type: application/json
 <dd><p>This function allows data manager to push newest data</p>
 <p><strong>Request</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/v2/exchange_rate/tcb</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">https://vapi.vnappmob.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Request Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – Bearer &lt;api_key|scope=exchange_rate|permission=1&gt;</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-even">Request JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>post_datas</strong> (<em>List[json]</em>) – List of json data with below params</p></li>
+<li><p><strong>currency</strong> (<em>string</em>) – currency code (3 chars: VND, USD…)</p></li>
+<li><p><strong>buy_cash</strong> (<em>float</em>) – buy_cash</p></li>
+<li><p><strong>buy_transfer</strong> (<em>float</em>) – buy_transfer</p></li>
+<li><p><strong>sell</strong> (<em>float</em>) – sell</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a> – Successful</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> – Fail on authorization</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-v2-exchange_rate-bid">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/api/v2/exchange_rate/bid</code><a class="headerlink" href="#get--api-v2-exchange_rate-bid" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function allows users to get the latest BIDV exchange rate</p>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/api/v2/exchange_rate/bid</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">https://vapi.vnappmob.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json
+
+{
+    &quot;results&quot;: [
+        {
+            &quot;currency&quot;: &quot;EUR&quot;,
+            &quot;buy_cash&quot;: 25416.27,
+            &quot;buy_transfer&quot;: 25492.75,
+            &quot;sell&quot;: 26258.39
+        },
+        {
+            &quot;currency&quot;: &quot;USD&quot;,
+            &quot;buy_cash&quot;: 23130.00,
+            &quot;buy_transfer&quot;: 23130.00,
+            &quot;sell&quot;: 23250.00
+        }...
+    ]
+}
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Request Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – Bearer &lt;api_key|scope=exchange_rate|permission=0&gt;</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response Headers</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – OK</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> – Fail on authorization</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--api-v2-exchange_rate-bid">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/api/v2/exchange_rate/bid</code><a class="headerlink" href="#post--api-v2-exchange_rate-bid" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function allows data manager to push newest data</p>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/v2/exchange_rate/bid</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">https://vapi.vnappmob.com</span>
 <span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
 </pre></div>
