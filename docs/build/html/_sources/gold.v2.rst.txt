@@ -7,7 +7,7 @@ Quick reference
 ########
 
 .. qrefflask:: app:app
-    :modules: app.api.v2.gold
+    :modules: app.api.v2.gold.sjc, app.api.v2.gold.doji, app.api.v2.gold.pnj
     :include-empty-docstring:
 
 
@@ -22,5 +22,5 @@ Details
 ########
 
 .. autoflask:: app:app
-    :modules: app.api.v2.gold
+    :modules: app.api.v2.gold.sjc, app.api.v2.gold.doji, app.api.v2.gold.pnj
     :include-empty-docstring:

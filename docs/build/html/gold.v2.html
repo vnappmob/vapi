@@ -198,6 +198,17 @@
 <td><p><a class="reference external" href="#post--api-v2-gold-doji">POST /api/v2/gold/doji</a></p></td>
 <td><p>Post DOJI Gold Price</p></td>
 </tr>
+<tr class="row-even"><td><ol class="arabic simple" start="3">
+<li><p>PNJ Price</p></li>
+</ol>
+</td>
+<td><p><a class="reference external" href="#get--api-v2-gold-pnj">GET /api/v2/gold/pnj</a></p></td>
+<td><p>Get PNJ Gold Price</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><a class="reference external" href="#post--api-v2-gold-pnj">POST /api/v2/gold/pnj</a></p></td>
+<td><p>Post PNJ Gold Price</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -219,18 +230,18 @@
 </pre></div>
 </div>
 <p><strong>Response</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json
 
-<span class="p">{</span>
-    <span class="nt">&quot;results&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&quot;buy_hcm&quot;</span><span class="p">:</span> <span class="mf">42550000.00</span><span class="p">,</span>
-            <span class="nt">&quot;sell_hcm&quot;</span><span class="p">:</span> <span class="mf">42550000.00</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
+{
+    &quot;results&quot;: [
+        {
+            &quot;buy_hcm&quot;: 42550000.00,
+            &quot;sell_hcm&quot;: 42550000.00
+        }...
+    ]
+}
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -319,9 +330,8 @@ Content-Type: application/json
     &quot;results&quot;: [
         {
             &quot;buy_1l&quot;: 42550000.00,
-            &quot;sell_1l&quot;: 42550000.00,
-            ...
-        }
+            &quot;sell_1l&quot;: 42550000.00
+        }...
     ]
 }
 </pre></div>
@@ -385,6 +395,98 @@ Content-Type: application/json
 <li><p><strong>sell_nhan1c</strong> (<em>float</em>) – sell_nhan1c</p></li>
 <li><p><strong>buy_trangsuc49</strong> (<em>float</em>) – buy_trangsuc49</p></li>
 <li><p><strong>sell_trangsuc49</strong> (<em>float</em>) – sell_trangsuc49</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">201 Created</a> – Successful</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> – Fail on authorization</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-v2-gold-pnj">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/api/v2/gold/pnj</code><a class="headerlink" href="#get--api-v2-gold-pnj" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function allows users to get the latest PNJ Gold price</p>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/api/v2/gold/pnj</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">https://vapi.vnappmob.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json
+
+{
+    &quot;results&quot;: [
+        {
+            &quot;buy_hcm&quot;: 42550000.00,
+            &quot;sell_hcm&quot;: 42550000.00
+        }...
+    ]
+}
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Query Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date_from</strong> – Set date from query</p></li>
+<li><p><strong>date_to</strong> – Set date to query</p></li>
+</ul>
+</dd>
+<dt class="field-even">Request Headers</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – Bearer &lt;api_key|scope=gold|permission=0&gt;</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Response Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – OK</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">403 Forbidden</a> – Fail on authorization</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--api-v2-gold-pnj">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/api/v2/gold/pnj</code><a class="headerlink" href="#post--api-v2-gold-pnj" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function allows data manager to push newest data</p>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/v2/gold/pnj</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">https://vapi.vnappmob.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Request Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – Bearer &lt;api_key|scope=gold|permission=1&gt;</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-even">Request JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>buy_hcm</strong> (<em>float</em>) – buy_hcm</p></li>
+<li><p><strong>sell_hcm</strong> (<em>float</em>) – sell_hcm</p></li>
+<li><p><strong>buy_hn</strong> (<em>float</em>) – buy_hn</p></li>
+<li><p><strong>sell_hn</strong> (<em>float</em>) – sell_hn</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Status Codes</dt>
