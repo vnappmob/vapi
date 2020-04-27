@@ -42,14 +42,12 @@ def api_v2_exchange_rate_sbv_get():
           "results": [
               {
                   "currency": "EUR",
-                  "buy_cash": 25416.27,
-                  "buy_transfer": 25492.75,
+                  "buy": 25416.27,
                   "sell": 26258.39
               },
               {
                   "currency": "USD",
-                  "buy_cash": 23130.00,
-                  "buy_transfer": 23130.00,
+                  "buy": 23130.00,
                   "sell": 23250.00
               }...
           ]
@@ -79,11 +77,8 @@ def api_v2_exchange_rate_sbv_get():
                     'sell': {
                         '$first': '$sell'
                     },
-                    'buy_cash': {
-                        '$first': '$buy_cash'
-                    },
-                    'buy_transfer': {
-                        '$first': '$buy_transfer'
+                    'buy': {
+                        '$first': '$buy'
                     }
                 }
             }, {
@@ -97,12 +92,9 @@ def api_v2_exchange_rate_sbv_get():
                     'sell': {
                         '$toDouble': '$sell'
                     },
-                    'buy_cash': {
-                        '$toDouble': '$buy_cash'
-                    },
-                    'buy_transfer': {
-                        '$toDouble': '$buy_transfer'
-                    },
+                    'buy': {
+                        '$toDouble': '$buy'
+                    }
                 }
             }
         ])
@@ -146,8 +138,7 @@ def api_v2_exchange_rate_sbv_post():
     :reqheader Content-Type: application/json
     :<json List[json] post_datas: List of json data with below params
     :<json string currency: currency code (3 chars: VND, USD...)
-    :<json float buy_cash: buy_cash
-    :<json float buy_transfer: buy_transfer
+    :<json float buy: buy
     :<json float sell: sell
     :status 201: Successful
     :status 400: Error
@@ -173,11 +164,8 @@ def api_v2_exchange_rate_sbv_post():
                     'sell': {
                         '$first': '$sell'
                     },
-                    'buy_cash': {
-                        '$first': '$buy_cash'
-                    },
-                    'buy_transfer': {
-                        '$first': '$buy_transfer'
+                    'buy': {
+                        '$first': '$buy'
                     }
                 }
             }, {
@@ -191,12 +179,9 @@ def api_v2_exchange_rate_sbv_post():
                     'sell': {
                         '$toDouble': '$sell'
                     },
-                    'buy_cash': {
-                        '$toDouble': '$buy_cash'
-                    },
-                    'buy_transfer': {
-                        '$toDouble': '$buy_transfer'
-                    },
+                    'buy': {
+                        '$toDouble': '$buy'
+                    }
                 }
             }
         ])
