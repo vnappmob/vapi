@@ -1,4 +1,4 @@
-"""app/api/v2/exchange_rate/vcb.py"""
+"""app/api/v2/exchange_rate/stb.py"""
 import datetime
 from collections import defaultdict
 
@@ -15,18 +15,18 @@ from app.helper import PostFCM
 SCOPE = 'exchange_rate'
 
 
-@bp.route('/api/v2/exchange_rate/vcb', methods=['GET'])
+@bp.route('/api/v2/exchange_rate/stb', methods=['GET'])
 @require_api_key(scope=SCOPE, permission=0)
-def api_v2_exchange_rate_vcb_get():
-    """.. :quickref: 01. Vietcombank (VCB); Get all Vietcombank (VCB) exchange rate
+def api_v2_exchange_rate_stb_get():
+    """.. :quickref: 05. Sacombank (STB); Get all Sacombank (STB) exchange rate
 
-    This function allows users to get the latest Vietcombank (VCB) exchange rate
+    This function allows users to get the latest Sacombank (STB) exchange rate
 
     **Request**:
 
     .. sourcecode:: http
 
-      GET /api/v2/exchange_rate/vcb HTTP/1.1
+      GET /api/v2/exchange_rate/stb HTTP/1.1
       Host: https://vapi.vnappmob.com
       Accept: application/json
 
@@ -63,7 +63,7 @@ def api_v2_exchange_rate_vcb_get():
     """
     try:
         db_connect = MongoDBConnect()
-        collection = 'exchange_rate_vcb'
+        collection = 'exchange_rate_stb'
 
         q_res = db_connect.connection['vapi'][collection].aggregate([
             {
@@ -120,10 +120,10 @@ def api_v2_exchange_rate_vcb_get():
         db_connect.connection.close()
 
 
-@bp.route('/api/v2/exchange_rate/vcb', methods=['POST'])
+@bp.route('/api/v2/exchange_rate/stb', methods=['POST'])
 @require_api_key(scope=SCOPE, permission=1)
-def api_v2_exchange_rate_vcb_post():
-    """.. :quickref: 01. Vietcombank (VCB); Post new exchange rate
+def api_v2_exchange_rate_stb_post():
+    """.. :quickref: 05. Sacombank (STB); Post new exchange rate
 
     This function allows data manager to push newest data
 
@@ -131,7 +131,7 @@ def api_v2_exchange_rate_vcb_post():
 
     .. sourcecode:: http
 
-      POST /api/v2/exchange_rate/vcb HTTP/1.1
+      POST /api/v2/exchange_rate/stb HTTP/1.1
       Host: https://vapi.vnappmob.com
       Accept: application/json
 
@@ -155,7 +155,7 @@ def api_v2_exchange_rate_vcb_post():
     """
     try:
         db_connect = MongoDBConnect()
-        collection = 'exchange_rate_vcb'
+        collection = 'exchange_rate_stb'
         fcm = request.args.get('fcm', default=0, type=int)
         json_data = request.get_json()
 
@@ -222,13 +222,13 @@ def api_v2_exchange_rate_vcb_post():
                 db_connect.connection['vapi'][collection].insert_one(new_doc)
                 if fcm == 1:
                     fcm_data = (
-                        '{"notification": {"title": "vPrice - Biến động tỷ giá Vietcombank (VCB)-%s",'
+                        '{"notification": {"title": "vPrice - Biến động tỷ giá Sacombank (STB)-%s",'
                         '"body": "Mua tiền mặt: %s'
                         '\nMua chuyển khoản: %s'
                         '\nBán: %s","sound": "default"},"priority": "high",'
                         '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                        '"id": "/topics/exchange_rate/vcb/%s","status": "done"},'
-                        '"to": "/topics/exchange_rate/vcb/%s"}' %
+                        '"id": "/topics/exchange_rate/stb/%s","status": "done"},'
+                        '"to": "/topics/exchange_rate/stb/%s"}' %
                         (
                             new_doc['currency'],
                             '{:,.2f}'.format(new_doc['buy_cash']),
