@@ -135,12 +135,9 @@ def api_v2_gold_pnj_post():
         if fcm == 1:
             fcm_data = (
                 '{"notification": {"title": "vPrice - Biến động giá PNJ"'
-                ',"body": "HCM: Mua ' + '{:,d}'.format(
-                    int(json_data['buy_hcm'])) + ' - Bán ' +
-                '{:,d}'.format(int(json_data['sell_hcm'])) +
-                ' \nHN: Mua ' + '{:,d}'.format(
-                    int(json_data['buy_hn'])) + ' - Bán ' +
-                '{:,d}'.format(int(json_data['sell_hn'])) +
+                ',"body": "HCM: Mua nhẫn 24K' + '{:,d}'.format(
+                    int(json_data['buy_nhan_24k'])) + ' - Bán nhẫn 24K' +
+                '{:,d}'.format(int(json_data['sell_nhan_24k'])) +
                 ' ","sound": "default"},"priority": "high",'
                 '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
                 '"id": "/topics/pnjgold","status": "done"},'
