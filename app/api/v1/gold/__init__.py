@@ -161,34 +161,34 @@ def api_gold_sjc_post():
                          json_data['sell_trangsuc49']))
                     db_connect.writecommit(statements, tuple(vals))
 
-                    headers = {
-                        'Authorization':
-                        'key=' + current_app.config['VPRICE_FCM_KEY'],
-                        'Content-Type':
-                        'application/json'
-                    }
+                    # headers = {
+                    #     'Authorization':
+                    #     'key=' + current_app.config['VPRICE_FCM_KEY'],
+                    #     'Content-Type':
+                    #     'application/json'
+                    # }
 
-                    data = (
-                        '{"notification": {"title": "vPrice - Biến động giá SJC"'
-                        ',"body": "1L: Mua ' + '{:,d}'.format(
-                            int(json_data['buy_1l'])) + ' - Bán ' +
-                        '{:,d}'.format(int(json_data['sell_1l'])) +
-                        '\n1c: Mua ' + '{:,d}'.format(
-                            int(json_data['buy_1c'])) + ' - Bán ' +
-                        '{:,d}'.format(int(json_data['sell_1c'])) +
-                        '\nTrang sức: Mua ' + '{:,d}'.format(
-                            int(json_data['buy_trangsuc49'])) + ' - Bán ' +
-                        '{:,d}'.format(int(json_data['sell_trangsuc49'])) +
-                        ' ","sound": "default"},"priority": "high",'
-                        '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                        '"id": "/topics/sjcgold","status": "done"},'
-                        '"to": "/topics/sjcgold"}')
+                    # data = (
+                    #     '{"notification": {"title": "vPrice - Biến động giá SJC"'
+                    #     ',"body": "1L: Mua ' + '{:,d}'.format(
+                    #         int(json_data['buy_1l'])) + ' - Bán ' +
+                    #     '{:,d}'.format(int(json_data['sell_1l'])) +
+                    #     '\n1c: Mua ' + '{:,d}'.format(
+                    #         int(json_data['buy_1c'])) + ' - Bán ' +
+                    #     '{:,d}'.format(int(json_data['sell_1c'])) +
+                    #     '\nTrang sức: Mua ' + '{:,d}'.format(
+                    #         int(json_data['buy_trangsuc49'])) + ' - Bán ' +
+                    #     '{:,d}'.format(int(json_data['sell_trangsuc49'])) +
+                    #     ' ","sound": "default"},"priority": "high",'
+                    #     '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
+                    #     '"id": "/topics/sjcgold","status": "done"},'
+                    #     '"to": "/topics/sjcgold"}')
 
-                    response = requests.post(
-                        'https://fcm.googleapis.com/fcm/send',
-                        headers=headers,
-                        data=data.encode('utf-8'))
-                    print(response.status_code, response.text)
+                    # response = requests.post(
+                    #     'https://fcm.googleapis.com/fcm/send',
+                    #     headers=headers,
+                    #     data=data.encode('utf-8'))
+                    # print(response.status_code, response.text)
 
                     return make_response((jsonify({'results': 201})), 201)
                 return make_response((jsonify({'results': 200})), 200)
@@ -333,24 +333,24 @@ def api_gold_doji_post():
                         'application/json'
                     }
 
-                    data = (
-                        '{"notification": {"title": "vPrice - Biến động giá DOJI"'
-                        ',"body": "HCM: Mua ' + '{:,d}'.format(
-                            int(json_data['buy_hcm'])) + ' - Bán ' +
-                        '{:,d}'.format(int(json_data['sell_hcm'])) +
-                        ' \nHN: Mua ' + '{:,d}'.format(
-                            int(json_data['buy_hn'])) + ' - Bán ' +
-                        '{:,d}'.format(int(json_data['sell_hn'])) +
-                        ' ","sound": "default"},"priority": "high",'
-                        '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                        '"id": "/topics/dojigold","status": "done"},'
-                        '"to": "/topics/dojigold"}')
+                    # data = (
+                    #     '{"notification": {"title": "vPrice - Biến động giá DOJI"'
+                    #     ',"body": "HCM: Mua ' + '{:,d}'.format(
+                    #         int(json_data['buy_hcm'])) + ' - Bán ' +
+                    #     '{:,d}'.format(int(json_data['sell_hcm'])) +
+                    #     ' \nHN: Mua ' + '{:,d}'.format(
+                    #         int(json_data['buy_hn'])) + ' - Bán ' +
+                    #     '{:,d}'.format(int(json_data['sell_hn'])) +
+                    #     ' ","sound": "default"},"priority": "high",'
+                    #     '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
+                    #     '"id": "/topics/dojigold","status": "done"},'
+                    #     '"to": "/topics/dojigold"}')
 
-                    response = requests.post(
-                        'https://fcm.googleapis.com/fcm/send',
-                        headers=headers,
-                        data=data.encode('utf-8'))
-                    print(response.status_code, response.text)
+                    # response = requests.post(
+                    #     'https://fcm.googleapis.com/fcm/send',
+                    #     headers=headers,
+                    #     data=data.encode('utf-8'))
+                    # print(response.status_code, response.text)
 
                     return make_response((jsonify({'results': 201})), 201)
                 return make_response((jsonify({'results': 200})), 200)
