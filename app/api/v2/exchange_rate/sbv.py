@@ -210,8 +210,8 @@ def api_v2_exchange_rate_sbv_post():
                         '{"notification": {"title": "vPrice - Biến động tỷ giá Ngân Hàng Nhà Nước (SBV)-%s",'
                         '"body": "Mua: %s\nBán: %s","sound": "default"},"priority": "high",'
                         '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                        '"id": "/topics/exchange_rate/sbv/%s","status": "done"},'
-                        '"to": "/topics/exchange_rate/sbv/%s"}' %
+                        '"id": "/topics/exchange_rate.sbv.%s","status": "done"},'
+                        '"to": "/topics/exchange_rate.sbv.%s"}' %
                         (
                             new_doc['currency'],
                             '{:,.2f}'.format(new_doc['buy']),

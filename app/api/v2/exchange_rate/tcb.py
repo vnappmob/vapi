@@ -227,8 +227,8 @@ def api_v2_exchange_rate_tcb_post():
                         '\nMua chuyển khoản: %s'
                         '\nBán: %s","sound": "default"},"priority": "high",'
                         '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                        '"id": "/topics/exchange_rate/tcb/%s","status": "done"},'
-                        '"to": "/topics/exchange_rate/tcb/%s"}' %
+                        '"id": "/topics/exchange_rate.tcb.%s","status": "done"},'
+                        '"to": "/topics/exchange_rate.tcb.%s"}' %
                         (
                             new_doc['currency'],
                             '{:,.2f}'.format(new_doc['buy_cash']),
