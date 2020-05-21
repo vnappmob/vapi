@@ -141,6 +141,12 @@ def api_v2_gold_doji_post():
                 ' \nHN: Mua ' + '{:,d}'.format(
                     int(json_data['buy_hn'])) + ' - Bán ' +
                 '{:,d}'.format(int(json_data['sell_hn'])) +
+                ' \nĐN: Mua ' + '{:,d}'.format(
+                    int(json_data['buy_dn'])) + ' - Bán ' +
+                '{:,d}'.format(int(json_data['sell_dn'])) +
+                ' \nCT: Mua ' + '{:,d}'.format(
+                    int(json_data['buy_ct'])) + ' - Bán ' +
+                '{:,d}'.format(int(json_data['sell_ct'])) +
                 ' ","sound": "default"},"priority": "high",'
                 '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
                 '"id": "/topics/dojigold","status": "done"},'
