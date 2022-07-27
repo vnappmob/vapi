@@ -14,3 +14,4 @@ simplejson
 requests
 sphinxcontrib-httpdomain
 pymongo
+Jinja2
