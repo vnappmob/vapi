@@ -100,7 +100,7 @@ def api_district_get(province_id):
         try:
             statements = (
                 "SELECT district_id, district_name, district_type, province_id, "
-                "X(location) AS lat, Y(location) AS lng "
+                "ST_X(location) AS lat, ST_Y(location) AS lng "
                 "FROM vnappmob_list_district WHERE province_id = '" +
                 province_id +
                 "' ORDER BY district_name COLLATE utf8_vietnamese_ci;")
