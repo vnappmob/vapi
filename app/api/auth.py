@@ -23,7 +23,8 @@ def require_api_key(scope='', permission=0):
 
                 payload = jwt.decode(
                     api_key,
-                    current_app.config.get('SECRET_KEY')
+                    current_app.config.get('SECRET_KEY'),
+                    algorithms=['HS256']
                 )
 
                 if payload['scope'] != '*' and payload['scope'] != scope:
