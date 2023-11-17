@@ -5,7 +5,7 @@ gunicorn
 mysqlclient
 Flask==2.0.3
 Flask-Cors==3.0.3
-flask_limiter
+flask_limiter==2.5.0
 PyJWT
 Unidecode==0.04.1
 python-dateutil
