@@ -14,7 +14,7 @@ Quick reference
 Usage permission
 ########
 
-To use this API, please self-request ``api_key`` at https://vapi.vnappmob.com/api/request_api_key?scope=gold
+To use this API, please self-request ``api_key`` at https://api.vnappmob.com/api/request_api_key?scope=gold
 
 The ``api_key`` will be expired by default after 15 days
 
