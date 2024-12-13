@@ -1,6 +1,6 @@
-## vAPI Project
+## VNAppMob API Project
 
-This project is an open project that allows users to fetch some basic data in Vietnam. Feel free to follow the project docs at https://vapi.vnappmob.com
+This project is an open project that allows users to fetch some basic data in Vietnam. Feel free to follow the project docs at https://api.vnappmob.com
 
 If you need more information, please hook us at hi@vnappmob.com
 

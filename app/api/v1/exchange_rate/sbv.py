@@ -19,7 +19,7 @@ def api_exchange_rate_sbv_get():
     .. sourcecode:: http
 
       GET /api/exchange_rate/sbv HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -78,7 +78,7 @@ def api_exchange_rate_sbv_post():
     .. sourcecode:: http
 
       POST /api/exchange_rate/sbv HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:

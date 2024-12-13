@@ -22,7 +22,7 @@ def api_gold_sjc_get():
     .. sourcecode:: http
 
       GET /api/gold/sjc HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -93,7 +93,7 @@ def api_gold_sjc_post():
     .. sourcecode:: http
 
       POST /api/gold/sjc HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -211,7 +211,7 @@ def api_gold_doji_get():
     .. sourcecode:: http
 
       GET /api/gold/doji HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -277,7 +277,7 @@ def api_gold_doji_post():
     .. sourcecode:: http
 
       POST /api/gold/doji HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:

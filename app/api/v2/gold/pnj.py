@@ -11,7 +11,6 @@ from app.api.v2.gold import bp
 from app.api.v2.gold.get_query import get_query
 from app.db.mongodb_connect import MongoDBConnect
 from app.errors import error_response
-from app.helper import PostFCM
 
 SCOPE = 'gold'
 
@@ -28,7 +27,7 @@ def api_v2_gold_pnj_get():
     .. sourcecode:: http
 
       GET /api/v2/gold/pnj HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -106,7 +105,7 @@ def api_v2_gold_pnj_post():
     .. sourcecode:: http
 
       POST /api/v2/gold/pnj HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -132,18 +131,6 @@ def api_v2_gold_pnj_post():
         fcm = request.args.get('fcm', default=0, type=int)
         json_data = request.get_json()
 
-        if fcm == 1:
-            fcm_data = (
-                '{"notification": {"title": "vPrice - Biến động giá PNJ"'
-                ',"body": "HCM: Mua nhẫn 24K ' + '{:,d}'.format(
-                    int(json_data['buy_nhan_24k'])) + ' - Bán nhẫn 24K ' +
-                '{:,d}'.format(int(json_data['sell_nhan_24k'])) +
-                ' ","sound": "default"},"priority": "high",'
-                '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                '"id": "/topics/pnjgold","status": "done"},'
-                '"to": "/topics/pnjgold"}'
-            )
-
         sort = list({
             'datetime': -1
         }.items())
@@ -164,10 +151,6 @@ def api_v2_gold_pnj_post():
         if changed:
             json_data['datetime'] = dt.datetime.now()
             db_connect.connection['vapi'][collection].insert_one(json_data)
-
-            if fcm == 1:
-                fcm_response = PostFCM.post_fcm(fcm_data)
-                print(fcm_response.status_code, fcm_response.text)
 
             return make_response((jsonify({'results': 201})), 201)
         return make_response((jsonify({'results': 200})), 200)

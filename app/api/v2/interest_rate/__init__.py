@@ -29,7 +29,7 @@ def api_v2_interest_rate_get(bankcode):
     .. sourcecode:: http
 
       GET /api/v2/interest_rate/{bankcode} HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:

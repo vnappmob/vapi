@@ -1,6 +1,9 @@
 FROM python:3.7-slim
-RUN apt-get update && apt-get install -y gcc python3-dev tzdata
-RUN apt-get install -y default-libmysqlclient-dev && apt-get install make
+RUN apt-get update \
+   && apt-get install -y gcc python3-dev tzdata \
+   && apt-get install -y default-libmysqlclient-dev \
+   && apt-get install -y make \
+   && apt-get clean
 COPY . /app
 
 WORKDIR /app

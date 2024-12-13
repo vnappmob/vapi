@@ -11,7 +11,6 @@ from app.api.v2.gold import bp
 from app.api.v2.gold.get_query import get_query
 from app.db.mongodb_connect import MongoDBConnect
 from app.errors import error_response
-from app.helper import PostFCM
 
 SCOPE = 'gold'
 
@@ -28,7 +27,7 @@ def api_v2_gold_doji_get():
     .. sourcecode:: http
 
       GET /api/v2/gold/doji HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -106,7 +105,7 @@ def api_v2_gold_doji_post():
     .. sourcecode:: http
 
       POST /api/v2/gold/doji HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -132,27 +131,6 @@ def api_v2_gold_doji_post():
         fcm = request.args.get('fcm', default=0, type=int)
         json_data = request.get_json()
 
-        if fcm == 1:
-            fcm_data = (
-                '{"notification": {"title": "vPrice - Biến động giá DOJI"'
-                ',"body": "HCM: Mua ' + '{:,d}'.format(
-                    int(json_data['buy_hcm'])) + ' - Bán ' +
-                '{:,d}'.format(int(json_data['sell_hcm'])) +
-                ' \nHN: Mua ' + '{:,d}'.format(
-                    int(json_data['buy_hn'])) + ' - Bán ' +
-                '{:,d}'.format(int(json_data['sell_hn'])) +
-                ' \nĐN: Mua ' + '{:,d}'.format(
-                    int(json_data['buy_dn'])) + ' - Bán ' +
-                '{:,d}'.format(int(json_data['sell_dn'])) +
-                ' \nCT: Mua ' + '{:,d}'.format(
-                    int(json_data['buy_ct'])) + ' - Bán ' +
-                '{:,d}'.format(int(json_data['sell_ct'])) +
-                ' ","sound": "default"},"priority": "high",'
-                '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                '"id": "/topics/dojigold","status": "done"},'
-                '"to": "/topics/dojigold"}'
-            )
-
         sort = list({
             'datetime': -1
         }.items())
@@ -173,10 +151,6 @@ def api_v2_gold_doji_post():
         if changed:
             json_data['datetime'] = dt.datetime.now()
             db_connect.connection['vapi'][collection].insert_one(json_data)
-
-            if fcm == 1:
-                fcm_response = PostFCM.post_fcm(fcm_data)
-                print(fcm_response.status_code, fcm_response.text)
 
             return make_response((jsonify({'results': 201})), 201)
         return make_response((jsonify({'results': 200})), 200)

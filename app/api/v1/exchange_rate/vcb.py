@@ -18,7 +18,7 @@ def api_exchange_rate_vcb_get():
     .. sourcecode:: http
 
       GET /api/exchange_rate/vcb HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -86,7 +86,7 @@ def api_exchange_rate_vcb_post():
     .. sourcecode:: http
 
       POST /api/exchange_rate/vcb HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:

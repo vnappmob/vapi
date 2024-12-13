@@ -21,7 +21,7 @@ def api_vbiz_search(keyword):
     .. sourcecode:: http
 
       GET /api/vbiz/search/{keyword} HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -94,7 +94,7 @@ def api_vbiz_get(vbiz_code):
     .. sourcecode:: http
 
       GET /api/vbiz/{vbiz_code} HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -148,7 +148,7 @@ def api_vbiz_cat_get(vbiz_category_id):
     .. sourcecode:: http
 
       GET /api/vbiz/cat/{vbiz_category_id} HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:

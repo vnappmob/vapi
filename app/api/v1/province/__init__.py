@@ -20,7 +20,7 @@ def api_province_get():
     .. sourcecode:: http
 
       GET /api/province HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -72,7 +72,7 @@ def api_district_get(province_id):
     .. sourcecode:: http
 
       GET /api/province/district/{province_id} HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -127,7 +127,7 @@ def api_ward_get(district_id):
     .. sourcecode:: http
 
       GET /api/province/ward/{district_id} HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:

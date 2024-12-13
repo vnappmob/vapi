@@ -1,5 +1,8 @@
 # Change log
 
+### 2024-12-13:
+- A normal day and something happend ^.^
+
 ### 2022-07-27:
 - Update query with MySQL 8
 - Update Flask version

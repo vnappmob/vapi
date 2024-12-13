@@ -10,7 +10,6 @@ from app.api.auth import require_api_key
 from app.api.v2.exchange_rate import bp
 from app.db.mongodb_connect import MongoDBConnect
 from app.errors import error_response
-from app.helper import PostFCM
 
 SCOPE = 'exchange_rate'
 
@@ -27,7 +26,7 @@ def api_v2_exchange_rate_stb_get():
     .. sourcecode:: http
 
       GET /api/v2/exchange_rate/stb HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -132,7 +131,7 @@ def api_v2_exchange_rate_stb_post():
     .. sourcecode:: http
 
       POST /api/v2/exchange_rate/stb HTTP/1.1
-      Host: https://vapi.vnappmob.com
+      Host: https://api.vnappmob.com
       Accept: application/json
 
     **Response**:
@@ -156,7 +155,6 @@ def api_v2_exchange_rate_stb_post():
     try:
         db_connect = MongoDBConnect()
         collection = 'exchange_rate_stb'
-        fcm = request.args.get('fcm', default=0, type=int)
         json_data = request.get_json()
 
         q_res = db_connect.connection['vapi'][collection].aggregate([
@@ -220,27 +218,6 @@ def api_v2_exchange_rate_stb_post():
                 }
                 new_doc.update(v)
                 db_connect.connection['vapi'][collection].insert_one(new_doc)
-                if fcm == 1:
-                    fcm_data = (
-                        '{"notification": {"title": "vPrice - Biến động tỷ giá Sacombank (STB)-%s",'
-                        '"body": "Mua tiền mặt: %s'
-                        '\nMua chuyển khoản: %s'
-                        '\nBán: %s","sound": "default"},"priority": "high",'
-                        '"data": {"click_action": "FLUTTER_NOTIFICATION_CLICK",'
-                        '"id": "/topics/exchange_rate.stb.%s","status": "done"},'
-                        '"to": "/topics/exchange_rate.stb.%s"}' %
-                        (
-                            new_doc['currency'],
-                            '{:,.2f}'.format(new_doc['buy_cash']),
-                            '{:,.2f}'.format(new_doc['buy_transfer']),
-                            '{:,.2f}'.format(new_doc['sell']),
-                            new_doc['currency'],
-                            new_doc['currency']
-                        )
-                    )
-
-                    fcm_response = PostFCM.post_fcm(fcm_data)
-                    print(fcm_response.status_code, fcm_response.text)
 
         if changed:
             return make_response((jsonify({'results': 201})), 201)
