@@ -40,7 +40,7 @@ class ProxiedRequest(Request):
 app = Flask(__name__, static_url_path='/',
             static_folder='../docs/build/html/')  # pylint: disable=C
 CORS(app)
-limiter = Limiter(app, key_func=get_remote_address)
+limiter = Limiter(get_remote_address, app=app)
 app.request_class = ProxiedRequest
 app.config.from_object(AppConfig)
 
