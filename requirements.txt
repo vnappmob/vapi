@@ -12,5 +12,7 @@ python-dateutil
 Babel
 simplejson
 requests
-sphinxcontrib-httpdomain
 pymongo
+sphinxcontrib-httpdomain
+recommonmark
+sphinx_rtd_theme
