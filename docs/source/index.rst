@@ -14,7 +14,6 @@ Welcome to vAPI's documentation!
    province
    gold.v2
    exchange_rate.v2
-   vbiz
 
 
 Indices and tables

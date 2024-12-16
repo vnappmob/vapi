@@ -17,8 +17,8 @@ sys.setrecursionlimit(1500)
 
 # -- Project information -----------------------------------------------------
 
-project = 'vAPI'
-copyright = '2013-2020, VNAppMob'
+project = 'VNAppMob Open API'
+copyright = '2013-2024, VNAppMob'
 author = 'VNAppMob'
 
 # The full version, including alpha/beta/rc tags
