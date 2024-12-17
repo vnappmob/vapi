@@ -28,6 +28,8 @@ Active virtual environments and install requirements packages
 ```
 source .venv/bin/activate
 pip install -r requirements.txt
+Or force install latest dependecies...
+pip install --upgrade --force-reinstall -r requirements.txt
 ```
 
 Set variables for running

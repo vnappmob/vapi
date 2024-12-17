@@ -8,9 +8,10 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 from app.api.auth import generate_api_key
-from app.db.db_connect import VDBConnect, MySQLdb
+# from app.db.db_connect import VDBConnect, MySQLdb
 from app.errors import error_response
-from app.api.v1.province import bp as api_province_bp
+# from app.api.v1.province import bp as api_province_bp
+from app.api.v2.province import bp as api_v2_province_bp
 # from app.api.v1.gold import bp as api_gold_bp
 from app.api.v2.gold import bp as api_v2_gold_bp
 # from app.api.v1.exchange_rate import bp as api_exchange_rate_bp
@@ -44,7 +45,8 @@ limiter = Limiter(get_remote_address, app=app)
 app.request_class = ProxiedRequest
 app.config.from_object(AppConfig)
 
-app.register_blueprint(api_province_bp)
+# app.register_blueprint(api_province_bp)
+app.register_blueprint(api_v2_province_bp)
 # app.register_blueprint(api_gold_bp)
 app.register_blueprint(api_v2_gold_bp)
 # app.register_blueprint(api_exchange_rate_bp)

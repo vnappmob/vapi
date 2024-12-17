@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to vAPI's documentation!
+Welcome to VNAppMob Open API documentation!
 ================================
 
 .. toctree::
@@ -11,7 +11,7 @@ Welcome to vAPI's documentation!
    :caption: Contents:
 
    author.md
-   province
+   province.v2
    gold.v2
    exchange_rate.v2
 

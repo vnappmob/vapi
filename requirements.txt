@@ -2,12 +2,12 @@ pytest
 pytest-cov
 python-dotenv
 gunicorn
-mysqlclient
-Flask==2.0.3
-Flask-Cors==3.0.3
+#mysqlclient
+Flask
+Flask-Cors
 flask_limiter
 PyJWT
-Unidecode==0.04.1
+Unidecode
 python-dateutil
 Babel
 simplejson
