@@ -13,12 +13,6 @@ cd docs && make clean && make html && cd ..
 
 ## Local dev
 
-Make sure to install system mysqlclient following documents https://pypi.org/project/mysqlclient/
-
-```
-pip install mysqlclient
-```
-
 Create virtual environments 
 ```
 python -m venv .venv

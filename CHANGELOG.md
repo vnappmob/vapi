@@ -1,5 +1,9 @@
 # Change log
 
+### 2024-12-17:
+- Remove vBiz
+- Upgrade Province API to version 2
+
 ### 2024-12-13:
 - A normal day and something happend ^.^
 
