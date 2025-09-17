@@ -132,7 +132,6 @@ def api_v2_gold_sjc_post():
     try:
         db_connect = MongoDBConnect()
         collection = 'gold_sjc'
-        fcm = request.args.get('fcm', default=0, type=int)
         json_data = request.get_json()
 
         sort = list({
@@ -147,9 +146,7 @@ def api_v2_gold_sjc_post():
             if type(v) is float:
                 json_data[k] = Decimal128(str(v))
 
-            if k not in last_row:
-                changed = True
-            elif (last_row[k]) != json_data[k]:
+            if k not in last_row or (last_row[k]) != json_data[k]:
                 changed = True
 
         if changed:

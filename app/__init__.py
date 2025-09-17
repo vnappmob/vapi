@@ -1,7 +1,7 @@
 """app/__init__.py"""
 import os
 import time
-from flask import Flask, Request, g, jsonify, request, make_response
+from flask import Flask, Request, abort, g, jsonify, request, make_response
 
 from flask_cors import CORS
 from flask_limiter import Limiter
@@ -41,7 +41,11 @@ class ProxiedRequest(Request):
 app = Flask(__name__, static_url_path='/',
             static_folder='../docs/build/html/')  # pylint: disable=C
 CORS(app)
-limiter = Limiter(get_remote_address, app=app)
+limiter = Limiter(
+  get_remote_address, 
+  app=app,            
+  default_limits=["100 per minute"]
+)
 app.request_class = ProxiedRequest
 app.config.from_object(AppConfig)
 
@@ -79,6 +83,9 @@ def request_api_key():
 
 @app.before_request
 def before_request():
+    ua = request.headers.get("User-Agent", "")
+    if "Hutool" in ua:
+      abort(429, description="Too Many Requests")
     g.start = time.time()
 
 
