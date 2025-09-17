@@ -83,10 +83,10 @@ def request_api_key():
 
 @app.before_request
 def before_request():
+    g.start = time.time()
     ua = request.headers.get("User-Agent", "")
     if "Hutool" in ua:
       abort(429, description="Too Many Requests")
-    g.start = time.time()
 
 
 @app.after_request
