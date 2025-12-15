@@ -20,7 +20,7 @@ def api_v2_exchange_rate_vcb_get():
     """.. :quickref: 01. Vietcombank (VCB); Get all Vietcombank (VCB) exchange rate
 
     This function allows users to get the latest Vietcombank (VCB) exchange rate.
-    Optionally, you can specify a date to get the latest exchange rate for that specific date.
+    Optionally, you can specify a date and/or currency to filter the results.
 
     **Request**:
 
@@ -31,6 +31,14 @@ def api_v2_exchange_rate_vcb_get():
       Accept: application/json
 
       GET /api/v2/exchange_rate/vcb?date=2024-01-15 HTTP/1.1
+      Host: https://api.vnappmob.com
+      Accept: application/json
+
+      GET /api/v2/exchange_rate/vcb?currency=USD HTTP/1.1
+      Host: https://api.vnappmob.com
+      Accept: application/json
+
+      GET /api/v2/exchange_rate/vcb?date=2024-01-15&currency=USD HTTP/1.1
       Host: https://api.vnappmob.com
       Accept: application/json
 
@@ -61,6 +69,7 @@ def api_v2_exchange_rate_vcb_get():
 
     :reqheader Authorization: Bearer <api_key|scope=exchange_rate|permission=0>
     :queryparam date: Optional date parameter in YYYY-MM-DD format to filter results by specific date
+    :queryparam currency: Optional currency code (3 chars: USD, EUR, etc.) to filter results by specific currency
     :resheader Content-Type: application/json
     :status 200: OK
     :status 400: Error
@@ -73,6 +82,9 @@ def api_v2_exchange_rate_vcb_get():
         # Build aggregation pipeline
         pipeline = []
 
+        # Build match filter conditions
+        match_conditions = {}
+
         # Add date filter if date parameter is provided
         date_param = request.args.get('date')
         if date_param:
@@ -83,16 +95,23 @@ def api_v2_exchange_rate_vcb_get():
                 start_of_day = query_date.replace(hour=0, minute=0, second=0, microsecond=0)
                 end_of_day = query_date.replace(hour=23, minute=59, second=59, microsecond=999999)
                 
-                pipeline.append({
-                    '$match': {
-                        'datetime': {
-                            '$gte': start_of_day,
-                            '$lte': end_of_day
-                        }
-                    }
-                })
+                match_conditions['datetime'] = {
+                    '$gte': start_of_day,
+                    '$lte': end_of_day
+                }
             except ValueError:
                 return error_response(400, 'Invalid date format. Use YYYY-MM-DD format.')
+
+        # Add currency filter if currency parameter is provided
+        currency_param = request.args.get('currency')
+        if currency_param:
+            match_conditions['currency'] = currency_param.upper()
+
+        # Add match stage if any filters are provided
+        if match_conditions:
+            pipeline.append({
+                '$match': match_conditions
+            })
 
         # Add sorting, grouping, and projection stages
         pipeline.extend([
