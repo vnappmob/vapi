@@ -19,13 +19,18 @@ SCOPE = 'exchange_rate'
 def api_v2_exchange_rate_tcb_get():
     """.. :quickref: 03. Techcombank (TCB); Get all Techcombank (TCB) exchange rate
 
-    This function allows users to get the latest Techcombank (TCB) exchange rate
+    This function allows users to get the latest Techcombank (TCB) exchange rate.
+    Optionally, you can specify a date to get the latest exchange rate for that specific date.
 
     **Request**:
 
     .. sourcecode:: http
 
       GET /api/v2/exchange_rate/tcb HTTP/1.1
+      Host: https://api.vnappmob.com
+      Accept: application/json
+
+      GET /api/v2/exchange_rate/tcb?date=2024-01-15 HTTP/1.1
       Host: https://api.vnappmob.com
       Accept: application/json
 
@@ -55,6 +60,7 @@ def api_v2_exchange_rate_tcb_get():
       }
 
     :reqheader Authorization: Bearer <api_key|scope=exchange_rate|permission=0>
+    :queryparam date: Optional date parameter in YYYY-MM-DD format to filter results by specific date
     :resheader Content-Type: application/json
     :status 200: OK
     :status 400: Error
@@ -64,7 +70,32 @@ def api_v2_exchange_rate_tcb_get():
         db_connect = MongoDBConnect()
         collection = 'exchange_rate_tcb'
 
-        q_res = db_connect.connection['vapi'][collection].aggregate([
+        # Build aggregation pipeline
+        pipeline = []
+
+        # Add date filter if date parameter is provided
+        date_param = request.args.get('date')
+        if date_param:
+            try:
+                # Parse the date string (YYYY-MM-DD format)
+                query_date = datetime.datetime.strptime(date_param, '%Y-%m-%d')
+                # Create date range: start of day to end of day
+                start_of_day = query_date.replace(hour=0, minute=0, second=0, microsecond=0)
+                end_of_day = query_date.replace(hour=23, minute=59, second=59, microsecond=999999)
+                
+                pipeline.append({
+                    '$match': {
+                        'datetime': {
+                            '$gte': start_of_day,
+                            '$lte': end_of_day
+                        }
+                    }
+                })
+            except ValueError:
+                return error_response(400, 'Invalid date format. Use YYYY-MM-DD format.')
+
+        # Add sorting, grouping, and projection stages
+        pipeline.extend([
             {
                 '$sort': {
                     'datetime': -1
@@ -105,6 +136,8 @@ def api_v2_exchange_rate_tcb_get():
                 }
             }
         ])
+
+        q_res = db_connect.connection['vapi'][collection].aggregate(pipeline)
 
         results = list(q_res)
 
