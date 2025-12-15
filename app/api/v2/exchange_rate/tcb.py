@@ -21,6 +21,7 @@ def api_v2_exchange_rate_tcb_get():
 
     This function allows users to get the latest Techcombank (TCB) exchange rate.
     Optionally, you can specify a date and/or currency to filter the results.
+    If a date is specified and no data exists for that date, it will return the nearest previous date's data.
 
     **Request**:
 
@@ -68,7 +69,7 @@ def api_v2_exchange_rate_tcb_get():
       }
 
     :reqheader Authorization: Bearer <api_key|scope=exchange_rate|permission=0>
-    :queryparam date: Optional date parameter in YYYY-MM-DD format to filter results by specific date
+    :queryparam date: Optional date parameter in YYYY-MM-DD format to filter results by specific date. If no data exists for that date, returns the nearest previous date's data.
     :queryparam currency: Optional currency code (3 chars: USD, EUR, etc.) to filter results by specific currency
     :resheader Content-Type: application/json
     :status 200: OK
@@ -91,12 +92,11 @@ def api_v2_exchange_rate_tcb_get():
             try:
                 # Parse the date string (YYYY-MM-DD format)
                 query_date = datetime.datetime.strptime(date_param, '%Y-%m-%d')
-                # Create date range: start of day to end of day
-                start_of_day = query_date.replace(hour=0, minute=0, second=0, microsecond=0)
+                # Use end of day as upper bound to include all data up to and including the specified date
+                # This allows finding the nearest previous date's data if no data exists on the specified date
                 end_of_day = query_date.replace(hour=23, minute=59, second=59, microsecond=999999)
                 
                 match_conditions['datetime'] = {
-                    '$gte': start_of_day,
                     '$lte': end_of_day
                 }
             except ValueError:
